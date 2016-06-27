@@ -1,5 +1,3 @@
-#Update the beam search decoder to actually use a beam size > 1
-
 
 ```python
 
