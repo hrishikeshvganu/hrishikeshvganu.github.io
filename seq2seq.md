@@ -984,7 +984,43 @@ def model_with_buckets(encoder_inputs, decoder_inputs, targets, weights,
   return outputs, losses
     print(a)
 ```  
+```python
+def _extract_argmax_and_embed(embedding, output_projection=None,
+                              update_embedding=True):
+  """Get a loop_function that extracts the previous symbol and embeds it.
 
+  Args:
+    embedding: embedding tensor for symbols.
+    output_projection: None or a pair (W, B). If provided, each fed previous
+      output will first be multiplied by W and added B.
+    update_embedding: Boolean; if False, the gradients will not propagate
+      through the embeddings.
+
+  Returns:
+    A loop function.
+
+  """
+  
+  def loop_function(prev, _):
+    if output_projection is not None:
+      prev = nn_ops.xw_plus_b(
+          prev, output_projection[0], output_projection[1])
+         
+   # Prev_symbol list instead of a single symbol
+
+
+   #k is beam size
+    k=10
+    prev_symbol= tf.nn.top_k(prev, k, name=None) 
+    prev_symbol = math_ops.argmax(prev, 1)
+    # Note that gradients will not propagate through the second parameter of
+    # embedding_lookup.
+    emb_prev = embedding_ops.embedding_lookup(embedding, prev_symbol)
+    if not update_embedding:
+      emb_prev = array_ops.stop_gradient(emb_prev)
+    return emb_prev
+  return loop_function
+```
 
 ----------
 
