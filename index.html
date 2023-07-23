@@ -12,78 +12,52 @@
 <body>
 <div id="content">
 <h1 class="title">Antipatterns: Effectively working with non-Tech Teams as an ML Manager</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orga7b313e">Summary</a></li>
-<li><a href="#orga0053f9">#1 "You promised to deliver this 4 days back"</a>
-<ul>
-<li><a href="#orga0e6e4e">Identification</a></li>
-<li><a href="#org457a37b">Handling</a></li>
-</ul>
-</li>
-<li><a href="#org5575d7c">#2 "Business EVP is saying our search page ranking is off. There are 2 products he should not be seeing"</a>
-<ul>
-<li><a href="#org9041bd4">Identification</a></li>
-<li><a href="#orgdb9f16c">Handling</a></li>
-</ul>
-</li>
-<li><a href="#orgddba785">#3 "As per design product x should be seen at position 6 in the first scroll and product y should be seen at position 4 in the second scroll for  this type of user"</a>
-<ul>
-<li><a href="#orgc802359">Identification</a></li>
-<li><a href="#orgfc9299f">Handling</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
 
-<div id="outline-container-orga7b313e" class="outline-2">
-<h2 id="orga7b313e">Summary</h2>
-<div class="outline-text-2" id="text-orga7b313e">
+<div id="outline-container-org73ff1a4" class="outline-2">
+<h2 id="org73ff1a4">Summary</h2>
+<div class="outline-text-2" id="text-org73ff1a4">
 <p>
 ML managers who work in Applied ML teams need to work with Business and Product people who are their stakeholders. While Product and Business managers are used to working with Engineering teams (backend, frontend etc.) some of them don't have experience working with ML teams. This can cause misunderstanding unless both sides take care to arrive at a "ways of working" model.
 I provide some examples of antipatterns and how to identify them and then handle them.
 </p>
 </div>
 </div>
-<div id="outline-container-orga0053f9" class="outline-2">
-<h2 id="orga0053f9">#1 "You promised to deliver this 4 days back"</h2>
-<div class="outline-text-2" id="text-orga0053f9">
+<div id="outline-container-org113a1c2" class="outline-2">
+<h2 id="org113a1c2">#1 "You promised to deliver this 4 days back"</h2>
+<div class="outline-text-2" id="text-org113a1c2">
 </div>
-<div id="outline-container-orga0e6e4e" class="outline-3">
-<h3 id="orga0e6e4e">Identification</h3>
-<div class="outline-text-3" id="text-orga0e6e4e">
+<div id="outline-container-org893f019" class="outline-3">
+<h3 id="org893f019">Identification</h3>
+<div class="outline-text-3" id="text-org893f019">
 <p>
 Deliverables are promised but don't get delivered on time. Product manager gets angry because they have to answer to  business. ML manager gets frustated because she knows that in ML work you can control the quality or the timeline of the output but it's generally difficult to control both.
 </p>
 </div>
 </div>
-<div id="outline-container-org457a37b" class="outline-3">
-<h3 id="org457a37b">Handling</h3>
-<div class="outline-text-3" id="text-org457a37b">
+<div id="outline-container-org3fb6343" class="outline-3">
+<h3 id="org3fb6343">Handling</h3>
+<div class="outline-text-3" id="text-org3fb6343">
 <p>
 You are part of the problem. Educating the PM about the nature of ML work and committing for a Proof of Concept first helps. "Let's do the POC first. Then based on the learning I can commit on the MVP"
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5575d7c" class="outline-2">
-<h2 id="org5575d7c">#2 "Business EVP is saying our search page ranking is off. There are 2 products he should not be seeing"</h2>
-<div class="outline-text-2" id="text-org5575d7c">
+<div id="outline-container-org48be003" class="outline-2">
+<h2 id="org48be003">#2 "Business EVP is saying our search page ranking is off. There are 2 products he should not be seeing"</h2>
+<div class="outline-text-2" id="text-org48be003">
 </div>
-<div id="outline-container-org9041bd4" class="outline-3">
-<h3 id="org9041bd4">Identification</h3>
-<div class="outline-text-3" id="text-org9041bd4">
+<div id="outline-container-org58b07c6" class="outline-3">
+<h3 id="org58b07c6">Identification</h3>
+<div class="outline-text-3" id="text-org58b07c6">
 <p>
 Business stakeholders are generally happy but need an explanation for something they feel is a discrepancy. PM is ruffled because she knows we should look at platform metrics but can't ignore individual user complaints as well. He asks "Do we have a bug?"
 </p>
 </div>
 </div>
-<div id="outline-container-orgdb9f16c" class="outline-3">
-<h3 id="orgdb9f16c">Handling</h3>
-<div class="outline-text-3" id="text-orgdb9f16c">
+<div id="outline-container-orgebfdb16" class="outline-3">
+<h3 id="orgebfdb16">Handling</h3>
+<div class="outline-text-3" id="text-orgebfdb16">
 <p>
 You need 2 things here: a)Provide users' events data to the PM so that they can convince themselves that the ranking is largely consistent with the users' events. Or else they can raise a bug ticket. b)Educate the PM as well as the business leader that the ML algorithm is intended to maximize the experience for millions of users on the platform. It is possible that a specific user might not get a 100% accurate recommendation/ranking. It's not omniscient but it's probably 5x better than any manual rules.
 </p>
@@ -91,31 +65,28 @@ You need 2 things here: a)Provide users' events data to the PM so that they can 
 </div>
 </div>
 
-<div id="outline-container-orgddba785" class="outline-2">
-<h2 id="orgddba785">#3 "As per design product x should be seen at position 6 in the first scroll and product y should be seen at position 4 in the second scroll for  this type of user"</h2>
-<div class="outline-text-2" id="text-orgddba785">
+<div id="outline-container-org7e272ad" class="outline-2">
+<h2 id="org7e272ad">#3 "As per design product x should be seen at position 6 in the first scroll and product y should be seen at position 4 in the second scroll for  this type of user"</h2>
+<div class="outline-text-2" id="text-org7e272ad">
 </div>
-<div id="outline-container-orgc802359" class="outline-3">
-<h3 id="orgc802359">Identification</h3>
-<div class="outline-text-3" id="text-orgc802359">
+<div id="outline-container-orgbc5ee6b" class="outline-3">
+<h3 id="orgbc5ee6b">Identification</h3>
+<div class="outline-text-3" id="text-orgbc5ee6b">
 <p>
 A business manager who handles the category in which x and y fall is unhappy because he is not getting enough visibility. Product manager does not know how the algorithm works so he's unable to explain.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgfc9299f" class="outline-3">
-<h3 id="orgfc9299f">Handling</h3>
-<div class="outline-text-3" id="text-orgfc9299f">
+<div id="outline-container-orgd153630" class="outline-3">
+<h3 id="orgd153630">Handling</h3>
+<div class="outline-text-3" id="text-orgd153630">
 <p>
 The first action you should take in this case is to educate both PM and Business that an ML algorithm can't ensure that a particular product x is always ranked in a particular slot. This is not a bug but it's how ML works. While learning on a continual basis the model can end up changing scores. Some algorithms can have randomzied components so even if the input is the same the output can change slightly. If this sort of direct control is needed it's best to add an Engineering logic layer which overrides the ML ranking.
 </p>
 </div>
 </div>
 </div>
-</div>
-<div id="postamble" class="status">
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3)</p>
 </div>
 </body>
 </html>
