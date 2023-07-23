@@ -10,9 +10,9 @@ Deliverables are promised but don't get delivered on time. Product manager gets 
 You are part of the problem. Educating the PM about the nature of ML work and committing for a Proof of Concept first helps. "Let's do the POC first. Then based on the learning I can commit on the MVP"
 * #2 "Business EVP is saying our search page ranking is off. There are 2 products he should not be seeing"
 ** Identification
-Business stakeholders are generally happy but need an explanation for something they feel is a discrepancy. PM is ruffled because she knows we should look at platform metrics but can't ignore individual user complaints as well. He asks "Do we have a bug?". You spend a lot of time in finding a bug because you dont' have a good systems' dashboard.
+Business stakeholders need an explanation for something they feel is a discrepancy. PM is ruffled because she knows we should look at platform metrics but can't ignore individual user complaints as well. He asks "Do we have a bug?". You spend a lot of time in finding a bug because you dont' have a good systems' dashboard.
 ** Handling
-You need 3 things here: a) Have dashboards that can quickly check that all pipelines and services are in order b)Provide users' events data to the PM so that they can convince themselves that the ranking is largely consistent with the users' events. Or else they can raise a bug ticket.c)Educate the PM as well as the business leader that the ML algorithm is intended to maximize the experience for millions of users on the platform. It is possible that a specific user might not get a 100% accurate recommendation/ranking. It's not omniscient but it's probably 5x better than any manual rules.
+You need 3 things here: a) Have dashboards that can quickly check that all pipelines and services are in order b)Provide users' events data to the PM so that they can convince themselves that the ranking is largely consistent with the users' events. Give them a self-serve debugging tool. Finally if there is not bug,  c)Educate the PM as well as the business leader that the ML algorithm is intended to maximize the experience for millions of users on the platform. It is possible that a specific user might not get a 100% accurate recommendation/ranking.
 
 * #3 "As per design product x should be seen at position 6 in the first scroll  for  this type of user"
 
