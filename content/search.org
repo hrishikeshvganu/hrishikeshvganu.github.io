@@ -2,7 +2,7 @@
 *** Ranking errors on the first page are worse than those on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 #+CAPTION: All ranking errors are not the same
-##+ATTR_HTML: :alt cat/spider image :title Action! :align right
+#+ATTR_HTML: :alt ranking_diff :title Action! :align right
 [[file:img/myimage.png]]
 
 **** Capturing this property through ML is not easy
@@ -13,3 +13,6 @@ Note: I use x<- y  to denote that x depends on y.
 - DISCOUNT<-Rank<- Predicted score ($S_i$)
 - $S_{i}$<-$\Theta$ (parameters over which the NDCG can be optimized)
 However the rank of a product is a step function of the predicted score.
+#+begin_verse
+Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business
+#+end_verse
