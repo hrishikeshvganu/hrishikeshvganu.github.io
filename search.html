@@ -38,17 +38,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc07bc79">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#org163f2e0">Ranking errors on the first page are worse than those on later pages</a>
 <ul>
-<li><a href="#org8c23872">Capturing this property through ML is not easy</a></li>
+<li><a href="#org758c026">Capturing this property through ML is not easy</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc07bc79" class="outline-2">
-<h2 id="orgc07bc79">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-orgc07bc79">
+<div id="outline-container-org163f2e0" class="outline-2">
+<h2 id="org163f2e0">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-org163f2e0">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -58,15 +58,20 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </p>
 </div>
 
-<div id="outline-container-org8c23872" class="outline-3">
-<h3 id="org8c23872">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-org8c23872">
+<div id="outline-container-org758c026" class="outline-3">
+<h3 id="org758c026">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org758c026">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
-DISCOUNT depends on the rank (r).
-DISCOUNT&lt;-Rank&lt;- Predicted score (\(S_i\))
-\(S_{i}\)&lt;-\(\Theta\) (parameters over which the NDCG can be optimized)
+Note: I use x&lt;- y  to denote that x depends on y.
+</p>
+<ul class="org-ul">
+<li>DISCOUNT depends on the rank (r).</li>
+<li>DISCOUNT&lt;-Rank&lt;- Predicted score (\(S_i\))</li>
+<li>\(S_{i}\)&lt;-\(\Theta\) (parameters over which the NDCG can be optimized)</li>
+</ul>
+<p>
 However the rank of a product is a step function of the predicted score.
 </p>
 </div>
