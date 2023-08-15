@@ -1,5 +1,5 @@
 #+title: Building a SOTA Search Ranking System
-*** Ranking errors on the first page are worse than those on later pages
+*** Ranking errors on the first page are worse (for the user) than those on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 #+CAPTION: All ranking errors are not the same
 #+ATTR_HTML: :alt ranking_diff :title Action! :align right
