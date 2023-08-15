@@ -15,5 +15,4 @@ Note: I use x<- y  to denote that x depends on y.
 However the rank of a product is a step function of the predicted score.
 
 
-
-*Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business*
+*Therefore need to find a proxy that's differentiable and is an upper bound for NDCG or similar losses that matter to business*
