@@ -1,0 +1,3 @@
+#+title: Building a SOTA Search Ranking System
+* Ranking: searching for a good loss function
+** Ranking errors on the first page are worse than those on later pages
