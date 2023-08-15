@@ -19,10 +19,10 @@ However the rank of a product is a step function of the predicted score.
 
 ***** How to find a proxy metric?
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
+[[https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf][LambdaRank and LambdaMART paper]]
+
 #+CAPTION: Ranking "force" heuristic of LambdaRank
 #+ATTR_HTML: :alt ranking_force :title Action! :align right
-
-
 [[./img/ranking_force.png]]
 
 $$ \mathrm{Force}_{k,l} = \lambda_{k,l}  \mathrm{Scalefactor}(k,l) \Delta NDCG (k,l) $$
