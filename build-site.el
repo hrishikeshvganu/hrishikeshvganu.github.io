@@ -52,7 +52,7 @@
              :with-toc t                ;; Include a table of contents
              :section-numbers nil       ;; Don't include section numbers
              :time-stamp-file nil)
-       (list "org-site:main/images"
+       (list "org-site:img"
         :base-directory "./content/img"
         :base-extension "png\\|jpg"
         :publishing-directory "./public/img"
