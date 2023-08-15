@@ -38,11 +38,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org267fdb3">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#org789272a">Ranking errors on the first page are worse (for the user) than those on later pages</a>
 <ul>
-<li><a href="#org2b288af">Capturing this property through ML is not easy</a>
+<li><a href="#org62f1c79">Capturing this property through ML is not easy</a>
 <ul>
-<li><a href="#orge222d10">How to find a proxy metric?</a></li>
+<li><a href="#orge3b5402">How to find a proxy metric?</a></li>
 </ul>
 </li>
 </ul>
@@ -50,9 +50,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org267fdb3" class="outline-2">
-<h2 id="org267fdb3">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-org267fdb3">
+<div id="outline-container-org789272a" class="outline-2">
+<h2 id="org789272a">Ranking errors on the first page are worse (for the user) than those on later pages</h2>
+<div class="outline-text-2" id="text-org789272a">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -64,9 +64,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-org2b288af" class="outline-3">
-<h3 id="org2b288af">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-org2b288af">
+<div id="outline-container-org62f1c79" class="outline-3">
+<h3 id="org62f1c79">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org62f1c79">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -87,9 +87,9 @@ However the rank of a product is a step function of the predicted score.
 </p>
 </div>
 
-<div id="outline-container-orge222d10" class="outline-4">
-<h4 id="orge222d10">How to find a proxy metric?</h4>
-<div class="outline-text-4" id="text-orge222d10">
+<div id="outline-container-orge3b5402" class="outline-4">
+<h4 id="orge3b5402">How to find a proxy metric?</h4>
+<div class="outline-text-4" id="text-orge3b5402">
 <p>
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 <a href="https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf">LambdaRank and LambdaMART paper</a>
