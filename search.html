@@ -38,17 +38,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7580034">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#orgb9668ad">Ranking errors on the first page are worse than those on later pages</a>
 <ul>
-<li><a href="#orgc3b7200">Capturing this property through ML is not easy</a></li>
+<li><a href="#orgde9d943">Capturing this property through ML is not easy</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7580034" class="outline-2">
-<h2 id="org7580034">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-org7580034">
+<div id="outline-container-orgb9668ad" class="outline-2">
+<h2 id="orgb9668ad">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-orgb9668ad">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -60,9 +60,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-orgc3b7200" class="outline-3">
-<h3 id="orgc3b7200">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-orgc3b7200">
+<div id="outline-container-orgde9d943" class="outline-3">
+<h3 id="orgde9d943">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-orgde9d943">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -78,9 +78,8 @@ However the rank of a product is a step function of the predicted score.
 </p>
 
 
-
 <p>
-<b>Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business</b>
+<b>Therefore need to find a proxy that's differentiable and is an upper bound for NDCG or similar losses that matter to business</b>
 </p>
 </div>
 </div>
