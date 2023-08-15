@@ -17,22 +17,22 @@
 (require 'ox-publish)
 
 
-(defun org-publish-attachment (_plist filename pub-dir)
-  "Publish a file with no transformation of any kind.
+;; (defun org-publish-attachment (_plist filename pub-dir)
+;;   "Publish a file with no transformation of any kind.
 
-FILENAME is the filename of the Org file to be published.  PLIST
-is the property list for the given project.  PUB-DIR is the
-publishing directory.
+;; FILENAME is the filename of the Org file to be published.  PLIST
+;; is the property list for the given project.  PUB-DIR is the
+;; publishing directory.
 
-Return output file name."
-  (unless (file-directory-p pub-dir)
-    (make-directory pub-dir t))
-  (let ((output (expand-file-name (file-name-nondirectory filename) pub-dir)))
-    (unless (file-equal-p (expand-file-name (file-name-directory filename))
-                          (file-name-as-directory (expand-file-name pub-dir)))
-      (copy-file filename output t))
-    ;; Return file name.
-    output))
+;; Return output file name."
+;;   (unless (file-directory-p pub-dir)
+;;     (make-directory pub-dir t))
+;;   (let ((output (expand-file-name (file-name-nondirectory filename) pub-dir)))
+;;     (unless (file-equal-p (expand-file-name (file-name-directory filename))
+;;                           (file-name-as-directory (expand-file-name pub-dir)))
+;;       (copy-file filename output t))
+;;     ;; Return file name.
+;;     output))
 ;; Customize the HTML output
 (setq org-html-validation-link nil            ;; Don't show validation link
       org-html-head-include-scripts nil       ;; Use our own scripts
@@ -56,7 +56,7 @@ Return output file name."
         :base-directory "./content/img"
         :base-extension "png\\|jpg"
         :publishing-directory "./public/img"
-        :publishing-function org-publish-attachment
+        :publishing-function 'org-publish-attachment
         )
 
        ))    ;; Don't include time stamp in file
