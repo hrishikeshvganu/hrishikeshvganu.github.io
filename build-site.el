@@ -34,7 +34,15 @@
              :with-creator nil            ;; Include Emacs and Org versions in footer
              :with-toc t                ;; Include a table of contents
              :section-numbers nil       ;; Don't include section numbers
-             :time-stamp-file nil)))    ;; Don't include time stamp in file
+             :time-stamp-file nil)
+       ("myprojectimages"
+        :base-directory "./content/img"
+        :base-extension "png\\|jpg"
+        :publishing-directory "./public/img"
+        :publishing-function org-publish-attachment
+        )
+
+       ))    ;; Don't include time stamp in file
 
 ;; Generate the site output
 (org-publish-all t)
