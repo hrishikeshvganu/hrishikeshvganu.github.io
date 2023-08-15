@@ -13,6 +13,7 @@ Note: I use x<- y  to denote that x depends on y.
 - DISCOUNT<-Rank<- Predicted score ($S_i$)
 - $S_{i}$<-$\Theta$ (parameters over which the NDCG can be optimized)
 However the rank of a product is a step function of the predicted score.
-#+begin_verse
-Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business
-#+end_verse
+
+
+
+*Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business*
