@@ -38,17 +38,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1f9d4dd">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#org7580034">Ranking errors on the first page are worse than those on later pages</a>
 <ul>
-<li><a href="#orgd64316f">Capturing this property through ML is not easy</a></li>
+<li><a href="#orgc3b7200">Capturing this property through ML is not easy</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1f9d4dd" class="outline-2">
-<h2 id="org1f9d4dd">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-org1f9d4dd">
+<div id="outline-container-org7580034" class="outline-2">
+<h2 id="org7580034">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-org7580034">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -60,9 +60,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-orgd64316f" class="outline-3">
-<h3 id="orgd64316f">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-orgd64316f">
+<div id="outline-container-orgc3b7200" class="outline-3">
+<h3 id="orgc3b7200">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-orgc3b7200">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -76,8 +76,11 @@ Note: I use x&lt;- y  to denote that x depends on y.
 <p>
 However the rank of a product is a step function of the predicted score.
 </p>
-<p class="verse">
-Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business<br />
+
+
+
+<p>
+<b>Therefore need to find a proxy that's differentiable and is a tight upper bound for NDCG or similar losses that matter to business</b>
 </p>
 </div>
 </div>
