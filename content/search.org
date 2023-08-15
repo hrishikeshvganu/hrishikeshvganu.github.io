@@ -1,5 +1,6 @@
 #+title: Building a SOTA Search Ranking System
-*** Ranking errors on the first page are worse (for the user) than those on later pages
+
+*** Ranking errors on the first page is worse (for the user) than  on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 #+CAPTION: All ranking errors are not the same
 #+ATTR_HTML: :alt ranking_diff :title Action! :align right
@@ -29,3 +30,8 @@ $$ \mathrm{Force}_{k,l} = \lambda_{k,l}  \mathrm{Scalefactor}(k,l) \Delta NDCG (
 Where $ {Scalefactor}(k,l)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of $k$ and $l$ is large and negative. $\Delta NDCG (k,l)$ is the change in NDCG if the product positons are swapped.
 - The "force" is used as the residual (gradient of the training loss) that has to be optimized through iterations of gradient boosting.
 - Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.
+
+***  Real world ranking needs to be efficient: inference latency, training cost \& sample efficiency matter
+Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars.
+
+**** Inference latency
