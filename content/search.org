@@ -20,10 +20,9 @@ However the rank of a product is a step function of the predicted score.
 ***** How to find a proxy metric?
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 
-#+DOWNLOADED: screenshot @ 2023-08-15 19:57:50
-#+CAPTION: Forces in LambdaRank
-#+ATTR_HTML: :alt ranking_diff :title Action! :align center
-[[file:sls/2023-08-15_19-57-50_screenshot.png]]
+
+#+DOWNLOADED: screenshot @ 2023-08-15 23:42:34
+[[file:2023-08-15_23-42-34_screenshot.png]]
 
 $\mathrm{Force}_{k,l}=\lambda_{k,l} \alpha \mathrm{Scale_factor}(k,l) \Delta NDCG (k,l)  $
 Where $ Scale_factor(k,l)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of $k$ and $l$ is large and negative. $\Delta NDCG (k,l)$ is the change in NDCG if the product positons are swapped.
@@ -31,5 +30,3 @@ Where $ Scale_factor(k,l)$ is a scaling factor from 0 to 1. This factor is large
 - Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.
 
 * Footnotes
-
-[fn:1] This terminilogy is unlike in regression problems where the residual refers to the difference between actual and predicted value.
