@@ -38,11 +38,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga50f766">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#org6c66cfc">Ranking errors on the first page are worse than those on later pages</a>
 <ul>
-<li><a href="#org00c432c">Capturing this property through ML is not easy</a>
+<li><a href="#org164fc38">Capturing this property through ML is not easy</a>
 <ul>
-<li><a href="#org1c977d0">How to find a proxy metric?</a></li>
+<li><a href="#org9d5af8c">How to find a proxy metric?</a></li>
 </ul>
 </li>
 </ul>
@@ -50,9 +50,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orga50f766" class="outline-2">
-<h2 id="orga50f766">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-orga50f766">
+<div id="outline-container-org6c66cfc" class="outline-2">
+<h2 id="org6c66cfc">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-org6c66cfc">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -64,9 +64,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-org00c432c" class="outline-3">
-<h3 id="org00c432c">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-org00c432c">
+<div id="outline-container-org164fc38" class="outline-3">
+<h3 id="org164fc38">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org164fc38">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -87,42 +87,29 @@ However the rank of a product is a step function of the predicted score.
 </p>
 </div>
 
-<div id="outline-container-org1c977d0" class="outline-4">
-<h4 id="org1c977d0">How to find a proxy metric?</h4>
-<div class="outline-text-4" id="text-org1c977d0">
+<div id="outline-container-org9d5af8c" class="outline-4">
+<h4 id="org9d5af8c">How to find a proxy metric?</h4>
+<div class="outline-text-4" id="text-org9d5af8c">
 <p>
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 </p>
 
-
-<div class="figure">
-<p><img src="sls/2023-08-15_19-57-50_screenshot.png" alt="ranking_diff" title="Action!" align="center" />
+<p>
+<a href="img/ranking_force.png">ranking<sub>force</sub></a>
 </p>
-<p><span class="figure-number">Figure 2: </span>Forces in LambdaRank</p>
-</div>
 
 <p>
 $\mathrm{Force}<sub>k,l</sub>=&lambda;<sub>k,l</sub> &alpha; \mathrm{Scale_factor}(k,l) &Delta; NDCG (k,l)  $
 Where $ Scale<sub>factor</sub>(k,l)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of \(k\) and \(l\) is large and negative. \(\Delta NDCG (k,l)\) is the change in NDCG if the product positons are swapped.
 </p>
 <ul class="org-ul">
-<li>The "force" is used as the residual (<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>gradient of the training loss) that has to be optimized through iterations of gradient boosting.</li>
+<li>The "force" is used as the residual (gradient of the training loss) that has to be optimized through iterations of gradient boosting.</li>
 <li>Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-<div id="footnotes">
-<h2 class="footnotes">Footnotes: </h2>
-<div id="text-footnotes">
-
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-This terminilogy is unlike in regression problems where the residual refers to the difference between actual and predicted value.
-</p></div></div>
-
-
 </div>
-</div></div>
 </body>
 </html>
