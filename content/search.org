@@ -1,7 +1,9 @@
 #+title: Building a SOTA Search Ranking System
 *** Ranking errors on the first page are worse than those on later pages
+In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 
+[[file:img/myimage.png][First page matters]]
 
-
-
-[[./img/myimage.png]]
+**** Capturing this property through ML is not easy
+A loss like NDCG takes into account this consideration. However the rank of a product is a step function of the predicted score.
+$$NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) $$

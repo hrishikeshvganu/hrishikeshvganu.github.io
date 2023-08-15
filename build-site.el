@@ -52,6 +52,7 @@
              :with-toc t                ;; Include a table of contents
              :section-numbers nil       ;; Don't include section numbers
              :time-stamp-file nil)
+;; HRISHI it all has to be org-site:img, ./public/img and ./content/img
        (list "org-site:img"
         :base-directory "./content/img"
         :base-extension "png\\|jpg"
