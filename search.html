@@ -38,17 +38,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org70adc10">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#orgb3a2199">Ranking errors on the first page are worse than those on later pages</a>
 <ul>
-<li><a href="#org695e34c">Capturing this property through ML is not easy</a></li>
+<li><a href="#org154ac03">Capturing this property through ML is not easy</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org70adc10" class="outline-2">
-<h2 id="org70adc10">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-org70adc10">
+<div id="outline-container-orgb3a2199" class="outline-2">
+<h2 id="orgb3a2199">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-orgb3a2199">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -58,12 +58,16 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </p>
 </div>
 
-<div id="outline-container-org695e34c" class="outline-3">
-<h3 id="org695e34c">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-org695e34c">
+<div id="outline-container-org154ac03" class="outline-3">
+<h3 id="org154ac03">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org154ac03">
 <p>
-A loss like NDCG takes into account this consideration. However the rank of a product is a step function of the predicted score.
+A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
+DISCOUNT depends on the rank (r).
+DISCOUNT&lt;-Rank&lt;- Predicted score (\(S_i\))
+\(S_{i}\)&lt;-\(\Theta\) (parameters over which the NDCG can be optimized)
+However the rank of a product is a step function of the predicted score.
 </p>
 </div>
 </div>
