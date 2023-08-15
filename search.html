@@ -8,6 +8,28 @@
 <title>Building a SOTA Search Ranking System</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -16,16 +38,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge2c92fc">Ranking errors on the first page are worse than those on later pages</a></li>
+<li><a href="#org70adc10">Ranking errors on the first page are worse than those on later pages</a>
+<ul>
+<li><a href="#org695e34c">Capturing this property through ML is not easy</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge2c92fc" class="outline-2">
-<h2 id="orge2c92fc">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-orge2c92fc">
+<div id="outline-container-org70adc10" class="outline-2">
+<h2 id="org70adc10">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-org70adc10">
+<p>
+In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
+</p>
 
-<div class="figure">
-<p><img src="./img/myimage.png" alt="myimage.png" />
+<p>
+<a href="img/myimage.png">First page matters</a>
+</p>
+</div>
+
+<div id="outline-container-org695e34c" class="outline-3">
+<h3 id="org695e34c">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org695e34c">
+<p>
+A loss like NDCG takes into account this consideration. However the rank of a product is a step function of the predicted score.
+\[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
 </p>
 </div>
 </div>
