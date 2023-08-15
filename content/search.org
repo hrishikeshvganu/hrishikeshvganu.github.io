@@ -8,7 +8,8 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 **** Capturing this property through ML is not easy
 A loss like NDCG takes into account this consideration.
 $$NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) $$
-DISCOUNT depends on the rank (r).
-DISCOUNT<-Rank<- Predicted score ($S_i$)
-$S_{i}$<-$\Theta$ (parameters over which the NDCG can be optimized)
+Note: I use x<- y  to denote that x depends on y.
+- DISCOUNT depends on the rank (r).
+- DISCOUNT<-Rank<- Predicted score ($S_i$)
+- $S_{i}$<-$\Theta$ (parameters over which the NDCG can be optimized)
 However the rank of a product is a step function of the predicted score.
