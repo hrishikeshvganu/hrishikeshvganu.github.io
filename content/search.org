@@ -26,6 +26,6 @@ It's not easy since it's an inverse problem. I'll go into the theory later but I
 [[./img/ranking_force.png]]
 
 $$ \mathrm{Force}_{k,l} = \lambda_{k,l}  \mathrm{Scale factor}(k,l) \Delta NDCG (k,l) $$
-Where $ \text{Scale_factor}\(k,l\)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of $k$ and $l$ is large and negative. $\Delta NDCG (k,l)$ is the change in NDCG if the product positons are swapped.
+Where $ \mathrm{Scale_factor}(k,l)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of $k$ and $l$ is large and negative. $\Delta NDCG (k,l)$ is the change in NDCG if the product positons are swapped.
 - The "force" is used as the residual (gradient of the training loss) that has to be optimized through iterations of gradient boosting.
 - Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.
