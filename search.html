@@ -38,11 +38,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8cba2fe">Ranking errors on the first page are worse than those on later pages</a>
+<li><a href="#org56d7416">Ranking errors on the first page are worse than those on later pages</a>
 <ul>
-<li><a href="#orgba9d470">Capturing this property through ML is not easy</a>
+<li><a href="#org386576e">Capturing this property through ML is not easy</a>
 <ul>
-<li><a href="#org1bd9466">How to find a proxy metric?</a></li>
+<li><a href="#org3938def">How to find a proxy metric?</a></li>
 </ul>
 </li>
 </ul>
@@ -50,9 +50,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8cba2fe" class="outline-2">
-<h2 id="org8cba2fe">Ranking errors on the first page are worse than those on later pages</h2>
-<div class="outline-text-2" id="text-org8cba2fe">
+<div id="outline-container-org56d7416" class="outline-2">
+<h2 id="org56d7416">Ranking errors on the first page are worse than those on later pages</h2>
+<div class="outline-text-2" id="text-org56d7416">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -64,9 +64,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-orgba9d470" class="outline-3">
-<h3 id="orgba9d470">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-orgba9d470">
+<div id="outline-container-org386576e" class="outline-3">
+<h3 id="org386576e">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org386576e">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -87,9 +87,9 @@ However the rank of a product is a step function of the predicted score.
 </p>
 </div>
 
-<div id="outline-container-org1bd9466" class="outline-4">
-<h4 id="org1bd9466">How to find a proxy metric?</h4>
-<div class="outline-text-4" id="text-org1bd9466">
+<div id="outline-container-org3938def" class="outline-4">
+<h4 id="org3938def">How to find a proxy metric?</h4>
+<div class="outline-text-4" id="text-org3938def">
 <p>
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 </p>
@@ -100,7 +100,7 @@ It's not easy since it's an inverse problem. I'll go into the theory later but I
 </div>
 
 <p>
-$ \mathrm{Force}<sub>k,l</sub>=&lambda;<sub>k,l</sub> &Alpha; \mathrm{Scale_factor}\(k,l\) &Delta; NDCG \(k,l\) $
+\[ \mathrm{Force}_{k,l}=\lambda_{k,l} \Alpha \mathrm{Scale_factor}\(k,l\) \Delta NDCG \(k,l\) \]
 Where $ \mathrm{Scale_factor}\(k,l\)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of \(k\) and \(l\) is large and negative. \(\Delta NDCG (k,l)\) is the change in NDCG if the product positons are swapped.
 </p>
 <ul class="org-ul">
