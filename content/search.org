@@ -23,7 +23,6 @@ It's not easy since it's an inverse problem. I'll go into the theory later but I
 #+DOWNLOADED: screenshot @ 2023-08-15 19:57:50
 #+CAPTION: Forces in LambdaRank
 #+ATTR_HTML: :alt ranking_diff :title Action! :align center
-[
 [[file:sls/2023-08-15_19-57-50_screenshot.png]]
 
 $\mathrm{Force}_{k,l}=\lambda_{k,l} \alpha \mathrm{Scale_factor}(k,l) \Delta NDCG (k,l)  $
