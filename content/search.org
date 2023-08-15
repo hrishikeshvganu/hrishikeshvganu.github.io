@@ -1,4 +1,4 @@
 #+title: Building a SOTA Search Ranking System
 *** Ranking errors on the first page are worse than those on later pages
 sjsjsjs
-[[file:img/myimage.png][myfile]]
+[[./img/myimage.png]]
