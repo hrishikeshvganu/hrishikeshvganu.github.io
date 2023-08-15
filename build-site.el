@@ -35,7 +35,7 @@
              :with-toc t                ;; Include a table of contents
              :section-numbers nil       ;; Don't include section numbers
              :time-stamp-file nil)
-       ("myprojectimages"
+       ("org-site:main/images"
         :base-directory "./content/img"
         :base-extension "png\\|jpg"
         :publishing-directory "./public/img"
