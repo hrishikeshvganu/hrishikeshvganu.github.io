@@ -27,11 +27,25 @@ It's not easy since it's an inverse problem. I'll go into the theory later but I
 [[./img/ranking_force.png]]
 
 $$ \mathrm{Force}_{k,l} = \lambda_{k,l}  \mathrm{Scalefactor}(k,l) \Delta NDCG (k,l) $$
-Where $ {Scalefactor}(k,l)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of $k$ and $l$ is large and negative. $\Delta NDCG (k,l)$ is the change in NDCG if the product positons are swapped.
+Where $ Scalefactor(k,l)$ is a scaling factor from 0 to 1. This factor is larger if the difference in scores of $k$ and $l$ is large and negative. $\Delta NDCG (k,l)$ is the change in NDCG if the product positons are swapped.
 - The "force" is used as the residual (gradient of the training loss) that has to be optimized through iterations of gradient boosting.
 - Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.
 
-***  Real world ranking needs to be efficient: inference latency, training cost \& sample efficiency matter
-Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars.
+***  Real world ranking needs to be efficient: inference latency and throughput, training cost & sample efficiency matter
 
 **** Inference latency
+
+Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars. There are 3 ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
+
+***** Parallelize the work
+
+***** Do less work
+Model cascades are one mechanism through which the average case unit latency can be brought down.
+The key idea is:
+- A cascade has n stages.
+- At each stage there's a choice:
+  - that the instance can exit the cascade and a prediction is generated
+  - else the instance passes to the next model in the cascade
+- The choice depends on the features of the instance. Assumption is that there is a mapping $\bar{x}: \rightarrow {1,2, \ldots, n}$ of features $\bar{x}$ to the stage at which the instance can exit the cascade
+
+***** System optimizations
