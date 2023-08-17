@@ -1,4 +1,4 @@
-#+options: num:1
+#+options: num:10
 #+title: Building a SOTA Search Ranking System
 
 *** Ranking errors on the first page is worse (for the user) than  on later pages
