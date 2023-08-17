@@ -50,6 +50,7 @@ The key idea is:
 
 #+CAPTION: Cascades redue the expected latency (for the same throughput)
 #+ATTR_HTML: :alt cascade :title Action! :align right
+
 [[./img/cascade.png/]]
 
 ***** System optimizations
