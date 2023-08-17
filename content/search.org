@@ -1,3 +1,4 @@
+#+options: num:1
 #+title: Building a SOTA Search Ranking System
 
 *** Ranking errors on the first page is worse (for the user) than  on later pages
@@ -33,11 +34,24 @@ Where $ Scalefactor(k,l)$ is a scaling factor from 0 to 1. This factor is larger
 
 ***  Real world ranking needs to be efficient: inference latency and throughput, training cost & sample efficiency matter
 
+**** Increase throughput
+***** Parallelize the work
+The following strategies fall under this header:
+****** Using GPUs
+GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching.
+****** Using models that can work on the same instance in parallel
+This strategy can be used if the score can be *decomposed* into components that can be added together. Usually this property is restricted to linear models. This strategy uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
+Eg: in the following equation, *Delinquent CC*, *Full time job* can be indicator variables (0/1) and due to decomposability each effect $w_{x} x$  can be separately computed.
+$$\mathrm{Score}= w_{\mathrm{Delinquent CC}\mathrm{Delinquent CC} + w_{\mathrm{Full time job}} \mathrm{Full time job} + ..$$
+
+*Note:* in today's world not many companies use such models for search ranking but when used it allows for massive parallelism.
+
+
+
+
 **** Inference latency
 
 Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars. There are 3 ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
-
-***** Parallelize the work
 
 ***** Do less work
 Model cascades are one mechanism through which the average case unit latency can be brought down.
@@ -48,6 +62,8 @@ The key idea is:
   - else the instance passes to the next model in the cascade
 - The choice depends on the features of the instance. Assumption is that there is a mapping $\bar{x}: \rightarrow {1,2, \ldots, n}$ of features $\bar{x}$ to the stage at which the instance can exit the cascade
 
+#+CAPTION: Cascades reduce average unit latency
+#+ATTR_HTML: :alt ranking_force :title Action! :align right
 
 [[./img/cascade.png]]
 
