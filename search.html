@@ -38,22 +38,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org13a06ec">Ranking errors on the first page is worse (for the user) than  on later pages</a>
+<li><a href="#org3b8dfc5">Ranking errors on the first page is worse (for the user) than  on later pages</a>
 <ul>
-<li><a href="#org742e9fb">Capturing this property through ML is not easy</a>
+<li><a href="#org9f86223">Capturing this property through ML is not easy</a>
 <ul>
-<li><a href="#org888be4f">How to find a proxy metric?</a></li>
+<li><a href="#orga729269">How to find a proxy metric?</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org231b9f4">Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</a>
+<li><a href="#orgcf3ea3c">Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</a>
 <ul>
-<li><a href="#org00477a1">Inference latency</a>
+<li><a href="#org80f351d">Inference latency</a>
 <ul>
-<li><a href="#org7bf4a0d">Parallelize the work</a></li>
-<li><a href="#org5cd01b1">Do less work</a></li>
-<li><a href="#orgaf7c44b">System optimizations</a></li>
+<li><a href="#org0daafca">Parallelize the work</a></li>
+<li><a href="#org6876b7c">Do less work</a></li>
+<li><a href="#org24388e7">System optimizations</a></li>
 </ul>
 </li>
 </ul>
@@ -62,9 +62,9 @@
 </div>
 </div>
 
-<div id="outline-container-org13a06ec" class="outline-2">
-<h2 id="org13a06ec">Ranking errors on the first page is worse (for the user) than  on later pages</h2>
-<div class="outline-text-2" id="text-org13a06ec">
+<div id="outline-container-org3b8dfc5" class="outline-2">
+<h2 id="org3b8dfc5">Ranking errors on the first page is worse (for the user) than  on later pages</h2>
+<div class="outline-text-2" id="text-org3b8dfc5">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 </p>
@@ -76,9 +76,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-org742e9fb" class="outline-3">
-<h3 id="org742e9fb">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-org742e9fb">
+<div id="outline-container-org9f86223" class="outline-3">
+<h3 id="org9f86223">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-org9f86223">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -99,9 +99,9 @@ However the rank of a product is a step function of the predicted score.
 </p>
 </div>
 
-<div id="outline-container-org888be4f" class="outline-4">
-<h4 id="org888be4f">How to find a proxy metric?</h4>
-<div class="outline-text-4" id="text-org888be4f">
+<div id="outline-container-orga729269" class="outline-4">
+<h4 id="orga729269">How to find a proxy metric?</h4>
+<div class="outline-text-4" id="text-orga729269">
 <p>
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 <a href="https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf">LambdaRank and LambdaMART paper</a>
@@ -127,25 +127,25 @@ Where $ Scalefactor(k,l)$ is a scaling factor from 0 to 1. This factor is larger
 </div>
 </div>
 
-<div id="outline-container-org231b9f4" class="outline-2">
-<h2 id="org231b9f4">Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</h2>
-<div class="outline-text-2" id="text-org231b9f4">
+<div id="outline-container-orgcf3ea3c" class="outline-2">
+<h2 id="orgcf3ea3c">Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</h2>
+<div class="outline-text-2" id="text-orgcf3ea3c">
 </div>
-<div id="outline-container-org00477a1" class="outline-3">
-<h3 id="org00477a1">Inference latency</h3>
-<div class="outline-text-3" id="text-org00477a1">
+<div id="outline-container-org80f351d" class="outline-3">
+<h3 id="org80f351d">Inference latency</h3>
+<div class="outline-text-3" id="text-org80f351d">
 <p>
 Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars. There are 3 ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
 </p>
 </div>
 
-<div id="outline-container-org7bf4a0d" class="outline-4">
-<h4 id="org7bf4a0d">Parallelize the work</h4>
+<div id="outline-container-org0daafca" class="outline-4">
+<h4 id="org0daafca">Parallelize the work</h4>
 </div>
 
-<div id="outline-container-org5cd01b1" class="outline-4">
-<h4 id="org5cd01b1">Do less work</h4>
-<div class="outline-text-4" id="text-org5cd01b1">
+<div id="outline-container-org6876b7c" class="outline-4">
+<h4 id="org6876b7c">Do less work</h4>
+<div class="outline-text-4" id="text-org6876b7c">
 <p>
 Model cascades are one mechanism through which the average case unit latency can be brought down.
 The key idea is:
@@ -160,14 +160,20 @@ The key idea is:
 <li>The choice depends on the features of the instance. Assumption is that there is a mapping \(\bar{x}: \rightarrow {1,2, \ldots, n}\) of features \(\bar{x}\) to the stage at which the instance can exit the cascade</li>
 </ul>
 
+
 <p>
 <a href="./img/cascade.png/">./img/cascade.png/</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgaf7c44b" class="outline-4">
-<h4 id="orgaf7c44b">System optimizations</h4>
+<div id="outline-container-org24388e7" class="outline-4">
+<h4 id="org24388e7">System optimizations</h4>
+<div class="outline-text-4" id="text-org24388e7">
+<p>
+This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
+</p>
+</div>
 </div>
 </div>
 </div>
