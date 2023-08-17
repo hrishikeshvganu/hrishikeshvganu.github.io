@@ -1,6 +1,6 @@
 #+options: num:10
 #+title: Building a SOTA Search Ranking System
-Disclaimer: This is a "*living*" document of my musings on search ranking in the real world. Some of the arguments will be hand-wavy rather than rigorous since this is not a scientific publication. I will try to keep it updated as my understanding of the subject evolves.
+_Disclaimer_: This is a "*living*" document of my musings on search ranking in the real world and will be in an unfinished state by definition. Some of the arguments will be hand-wavy rather than rigorous since this is not a scientific publication. I will try to keep it updated as my understanding of the subject evolves.
 *Who will benefit*
 - ML engineers interested in building low latency search ranking systems that work at internet scale (think tens of millions of concurrent users)
 - Applied ML scientists who are working in the domain of product search or document search-especially at large internet companies
@@ -9,13 +9,13 @@ Disclaimer: This is a "*living*" document of my musings on search ranking in the
  *Who will not benefit*
  If you are lookiing for mathematical  theory of LTR etc. this might not be the right place for it.
 
-** Ranking errors on the first page are worse (for the customer experience) than  on later pages
+* Ranking errors on the first page are worse (for the customer experience) than  on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 #+CAPTION: All ranking errors are not the same
 #+ATTR_HTML: :alt ranking_diff :title Action! :align right
 [[file:img/myimage.png]]
 
-**** Capturing this property through ML is not easy
+** Capturing this property through ML is not easy
 A loss like NDCG takes into account this consideration.
 $$NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) $$
 Note: I use x<- y  to denote that x depends on y.
@@ -27,7 +27,7 @@ However the rank of a product is a step function of the predicted score.
 
 *Therefore need to find a proxy that's differentiable and is an upper bound for NDCG or similar losses that matter to business*
 
-***** How to find a proxy metric?
+*** How to find a proxy metric?
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 [[https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf][LambdaRank and LambdaMART paper]]
 
@@ -40,10 +40,10 @@ Where $ Scalefactor(k,l)$ is a scaling factor from 0 to 1. This factor is larger
 - The "force" is used as the residual (gradient of the training loss) that has to be optimized through iterations of gradient boosting.
 - Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.
 
-**  Real world ranking needs to be efficient: inference latency and throughput, training cost & sample efficiency matter
+*  Real world ranking needs to be efficient: inference latency and throughput, training cost & sample efficiency matter
 
-**** Increase throughput
-***** Parallelize the work
+** Increase throughput
+*** Parallelize the work
 The following strategies fall under this header:
 ****** Using GPUs
 GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching.
@@ -58,11 +58,11 @@ $$\mathrm{Score}= w_{\mathrm{Delinquent CC}}\mathrm{Delinquent CC} + w_{\mathrm{
 
 
 
-**** Inference latency
+** Inference latency
 
 Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars. There are 3 ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
 
-***** Do less work
+*** Do less work
 Model cascades are one mechanism through which the average case unit latency can be brought down.
 The key idea is:
 - A cascade has n stages.
@@ -76,5 +76,5 @@ The key idea is:
 
 [[./img/cascade.png]]
 
-***** System optimizations
+*** System optimizations
 This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
