@@ -38,26 +38,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbbf56ba">1. Ranking errors on the first page is worse (for the user) than  on later pages</a>
+<li><a href="#orgf442050">1. Ranking errors on the first page is worse (for the user) than  on later pages</a>
 <ul>
-<li><a href="#org00f5ef0">Capturing this property through ML is not easy</a>
+<li><a href="#orgaa58666">Capturing this property through ML is not easy</a>
 <ul>
-<li><a href="#org7c29f70">How to find a proxy metric?</a></li>
+<li><a href="#org690eddf">How to find a proxy metric?</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org0c96e2c">2. Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</a>
+<li><a href="#orgb46c65f">2. Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</a>
 <ul>
-<li><a href="#org40db9dd">Increase throughput</a>
+<li><a href="#org6f6c484">Increase throughput</a>
 <ul>
-<li><a href="#org2e0feb3">Parallelize the work</a></li>
+<li><a href="#org6dad849">Parallelize the work</a></li>
 </ul>
 </li>
-<li><a href="#org13e6656">Inference latency</a>
+<li><a href="#orgaa99765">Inference latency</a>
 <ul>
-<li><a href="#orgd7c1305">Do less work</a></li>
-<li><a href="#org50400c9">System optimizations</a></li>
+<li><a href="#orgd7875f0">Do less work</a></li>
+<li><a href="#orgbf33dd1">System optimizations</a></li>
 </ul>
 </li>
 </ul>
@@ -66,8 +66,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgbbf56ba" class="outline-2">
-<h2 id="orgbbf56ba"><span class="section-number-2">1</span> Ranking errors on the first page is worse (for the user) than  on later pages</h2>
+<div id="outline-container-orgf442050" class="outline-2">
+<h2 id="orgf442050"><span class="section-number-2">1</span> Ranking errors on the first page is worse (for the user) than  on later pages</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
@@ -80,9 +80,9 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. T
 </div>
 </div>
 
-<div id="outline-container-org00f5ef0" class="outline-3">
-<h3 id="org00f5ef0">Capturing this property through ML is not easy</h3>
-<div class="outline-text-3" id="text-org00f5ef0">
+<div id="outline-container-orgaa58666" class="outline-3">
+<h3 id="orgaa58666">Capturing this property through ML is not easy</h3>
+<div class="outline-text-3" id="text-orgaa58666">
 <p>
 A loss like NDCG takes into account this consideration.
 \[NDCG@k = \sum_{1}^{k}GAIN(i) DISCOUNT(i) \]
@@ -103,9 +103,9 @@ However the rank of a product is a step function of the predicted score.
 </p>
 </div>
 
-<div id="outline-container-org7c29f70" class="outline-4">
-<h4 id="org7c29f70">How to find a proxy metric?</h4>
-<div class="outline-text-4" id="text-org7c29f70">
+<div id="outline-container-org690eddf" class="outline-4">
+<h4 id="org690eddf">How to find a proxy metric?</h4>
+<div class="outline-text-4" id="text-org690eddf">
 <p>
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
 <a href="https://www.microsoft.com/en-us/research/uploads/prod/2016/02/MSR-TR-2010-82.pdf">LambdaRank and LambdaMART paper</a>
@@ -131,31 +131,31 @@ Where $ Scalefactor(k,l)$ is a scaling factor from 0 to 1. This factor is larger
 </div>
 </div>
 
-<div id="outline-container-org0c96e2c" class="outline-2">
-<h2 id="org0c96e2c"><span class="section-number-2">2</span> Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</h2>
+<div id="outline-container-orgb46c65f" class="outline-2">
+<h2 id="orgb46c65f"><span class="section-number-2">2</span> Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org40db9dd" class="outline-3">
-<h3 id="org40db9dd">Increase throughput</h3>
-<div class="outline-text-3" id="text-org40db9dd">
+<div id="outline-container-org6f6c484" class="outline-3">
+<h3 id="org6f6c484">Increase throughput</h3>
+<div class="outline-text-3" id="text-org6f6c484">
 </div>
-<div id="outline-container-org2e0feb3" class="outline-4">
-<h4 id="org2e0feb3">Parallelize the work</h4>
-<div class="outline-text-4" id="text-org2e0feb3">
+<div id="outline-container-org6dad849" class="outline-4">
+<h4 id="org6dad849">Parallelize the work</h4>
+<div class="outline-text-4" id="text-org6dad849">
 <p>
 The following strategies fall under this header:
 </p>
 </div>
 <ul class="org-ul">
-<li><a id="org4bc634e"></a>Using GPUs<br />
-<div class="outline-text-5" id="text-org4bc634e">
+<li><a id="orga1c961a"></a>Using GPUs<br />
+<div class="outline-text-5" id="text-orga1c961a">
 <p>
 GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching.
 </p>
 </div>
 </li>
-<li><a id="org2a32061"></a>Using models that can work on the same instance in parallel<br />
-<div class="outline-text-5" id="text-org2a32061">
+<li><a id="org4379b9d"></a>Using models that can work on the same instance in parallel<br />
+<div class="outline-text-5" id="text-org4379b9d">
 <p>
 This strategy can be used if the score can be <b>decomposed</b> into components that can be added together. Usually this property is restricted to linear models. This strategy uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
 Eg: in the following equation, <b>Delinquent CC</b>, <b>Full time job</b> can be indicator variables (0/1) and due to decomposability each effect \(w_{x} x\)  can be separately computed.
@@ -163,7 +163,7 @@ Eg: in the following equation, <b>Delinquent CC</b>, <b>Full time job</b> can be
 </p>
 
 <p>
-<b>Note:</b> in today's world not many companies use such models for search ranking but when used it allows for massive parallelism.
+<b>Note:</b> in today's world not many companies use such models for search ranking but when used this allows for massive parallelism.
 </p>
 </div>
 </li>
@@ -174,17 +174,17 @@ Eg: in the following equation, <b>Delinquent CC</b>, <b>Full time job</b> can be
 
 
 
-<div id="outline-container-org13e6656" class="outline-3">
-<h3 id="org13e6656">Inference latency</h3>
-<div class="outline-text-3" id="text-org13e6656">
+<div id="outline-container-orgaa99765" class="outline-3">
+<h3 id="orgaa99765">Inference latency</h3>
+<div class="outline-text-3" id="text-orgaa99765">
 <p>
 Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars. There are 3 ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
 </p>
 </div>
 
-<div id="outline-container-orgd7c1305" class="outline-4">
-<h4 id="orgd7c1305">Do less work</h4>
-<div class="outline-text-4" id="text-orgd7c1305">
+<div id="outline-container-orgd7875f0" class="outline-4">
+<h4 id="orgd7875f0">Do less work</h4>
+<div class="outline-text-4" id="text-orgd7875f0">
 <p>
 Model cascades are one mechanism through which the average case unit latency can be brought down.
 The key idea is:
@@ -207,9 +207,9 @@ The key idea is:
 </div>
 </div>
 
-<div id="outline-container-org50400c9" class="outline-4">
-<h4 id="org50400c9">System optimizations</h4>
-<div class="outline-text-4" id="text-org50400c9">
+<div id="outline-container-orgbf33dd1" class="outline-4">
+<h4 id="orgbf33dd1">System optimizations</h4>
+<div class="outline-text-4" id="text-orgbf33dd1">
 <p>
 This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
 </p>
