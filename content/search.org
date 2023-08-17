@@ -1,7 +1,15 @@
 #+options: num:10
 #+title: Building a SOTA Search Ranking System
+Disclaimer: This is a "living" document of my musings on search ranking in the real world. Some of the arguments will be hand-wavy rather than rigorous since this is not a scientific publication.
+*Who will benefit*
+- ML engineers interested in building low latency search ranking systems that work at internet scale (think tens of millions of concurrent users)
+- Applied ML scientists who are working in the domain of product search or document search-especially at large internet companies
+- Product/Program managers and business leaders who want to understand the technical side of search ranking
 
-*** Ranking errors on the first page is worse (for the user) than  on later pages
+ *Who will not benefit*
+ If you are lookiing for mathematical  theory of LTR etc. this might not be the right place for it.
+
+** Ranking errors on the first page are worse (for the customer experience) than  on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 #+CAPTION: All ranking errors are not the same
 #+ATTR_HTML: :alt ranking_diff :title Action! :align right
