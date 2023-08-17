@@ -1,5 +1,5 @@
 #+options: num:10
-#+title: Building a SOTA Search Ranking System
+#+title: Building a SOTA Search Ranking System: key principles
 _Disclaimer_: This is a "*living*" document of my musings on search ranking in the real world and will be in an unfinished state by definition. Some of the arguments will be hand-wavy rather than rigorous since this is not a scientific publication. I will try to keep it updated as my understanding of the subject evolves.
  *Target audience*[fn:1]
 * Ranking errors on the first page are worse (for the customer experience) than  on later pages
