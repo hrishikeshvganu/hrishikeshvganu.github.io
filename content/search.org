@@ -40,6 +40,8 @@ Where $ Scalefactor(k,l)$ is a scaling factor from 0 to 1. This factor is larger
 - The "force" is used as the residual (gradient of the training loss) that has to be optimized through iterations of gradient boosting.
 - Thus a pair of products in mutually incorrect order gets a higher penalty if the difference in current scores is large and negative.
 
+Thus the total *force* on a product that is in an incorrect position is the sum of the forces exerted on it due to pairwise violations and change in NDCG by resolving those violations. This is supposed to track NDCG better than just reducing the \# pairwise violations.
+
 *  Real world ranking needs to be efficient: inference latency and throughput, training cost & sample efficiency matter
 
 ** Increase throughput
@@ -53,10 +55,7 @@ Eg: in the following equation, *Delinquent CC*, *Full time job* can be indicator
 
 $$\mathrm{Score}= w_{\mathrm{Delinquent CC}}\mathrm{Delinquent CC} + w_{\mathrm{Full time job}} \mathrm{Full time job} + ..$$
 
-*Note:* in today's world not many companies use such models for search ranking but when used this allows for massive parallelism.
-
-
-
+*Note:* in today's world most companies don't use such models for search ranking but when used the framework allows for massive parallelism.
 
 ** Inference latency
 
