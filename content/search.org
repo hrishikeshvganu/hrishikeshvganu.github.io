@@ -1,15 +1,7 @@
 #+options: num:10
 #+title: Building a SOTA Search Ranking System
 _Disclaimer_: This is a "*living*" document of my musings on search ranking in the real world and will be in an unfinished state by definition. Some of the arguments will be hand-wavy rather than rigorous since this is not a scientific publication. I will try to keep it updated as my understanding of the subject evolves.
-
-*Who will benefit*
-- ML engineers interested in building low latency search ranking systems that work at internet scale (think tens of millions of concurrent users)
-- Applied ML scientists who are working in the domain of product search or document search-especially at large internet companies
-- Product/Program managers and business leaders who want to understand the technical side of search ranking
-
- *Who will not benefit*
- If you are lookiing for mathematical  theory of LTR etc. this might not be the right place for it.
-
+* Target audience[fn:1]
 * Ranking errors on the first page are worse (for the customer experience) than  on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. The one on left is worse.
 #+CAPTION: All ranking errors are not the same
@@ -51,7 +43,7 @@ The following strategies fall under this header:
 ****** Using GPUs
 GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching.
 ****** Using models that can work on the same instance in parallel
-This strategy can be used if the score can be *decomposed* into components that can be added together. Usually this property is restricted to linear models. This strategy uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
+This strategy can be used if the score can be *decomposed* into components that can be added together. Usually this property is restricted to linear models. This strategy was actually SOTA uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
 Eg: in the following equation, *Delinquent CC*, *Full time job* can be indicator variables (0/1) and due to decomposability each effect $w_{x} x$  can be separately computed.
 
 $$\mathrm{Score}= w_{\mathrm{Delinquent CC}}\mathrm{Delinquent CC} + w_{\mathrm{Full time job}} \mathrm{Full time job} + ..$$
@@ -78,3 +70,13 @@ The key idea is:
 
 *** System optimizations
 This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
+
+* Footnotes
+
+[fn:1] *Who will benefit*
+- ML engineers interested in building low latency search ranking systems that work at internet scale (think tens of millions of concurrent users)
+- Applied ML scientists who are working in the domain of product search or document search-especially at large internet companies
+- Product/Program managers and business leaders who want to understand the technical side of search ranking
+
+ *Who will not benefit*
+ If you are lookiing for mathematical  theory of LTR etc. this might not be the right place for it.
