@@ -42,7 +42,8 @@ GPUs have thousands of cores and can perform operations in parallel on multiple 
 ****** Using models that can work on the same instance in parallel
 This strategy can be used if the score can be *decomposed* into components that can be added together. Usually this property is restricted to linear models. This strategy uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
 Eg: in the following equation, *Delinquent CC*, *Full time job* can be indicator variables (0/1) and due to decomposability each effect $w_{x} x$  can be separately computed.
-$$\mathrm{Score}= w_{\mathrm{Delinquent CC}\mathrm{Delinquent CC} + w_{\mathrm{Full time job}} \mathrm{Full time job} + ..$$
+
+$$\mathrm{Score}= w_{\mathrm{Delinquent CC}}\mathrm{Delinquent CC} + w_{\mathrm{Full time job}} \mathrm{Full time job} + ..$$
 
 *Note:* in today's world not many companies use such models for search ranking but when used this allows for massive parallelism.
 
