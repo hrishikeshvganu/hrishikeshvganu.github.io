@@ -48,9 +48,8 @@ The key idea is:
   - else the instance passes to the next model in the cascade
 - The choice depends on the features of the instance. Assumption is that there is a mapping $\bar{x}: \rightarrow {1,2, \ldots, n}$ of features $\bar{x}$ to the stage at which the instance can exit the cascade
 
-#+CAPTION: Cascades redue the expected latency (for the same throughput)
-#+ATTR_HTML: :alt cascade :title Action! :align right
 
 [[./img/cascade.png/]]
 
 ***** System optimizations
+This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
