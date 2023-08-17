@@ -15,10 +15,10 @@ Note: I use x<- y  to denote that x depends on y.
 - DISCOUNT depends on the rank (r).
 - DISCOUNT<-Rank<- Predicted score ($S_i$)
 - $S_{i}$<-$\Theta$ (parameters over which the NDCG can be optimized)
-However the rank of a product is a step function of the predicted score.
 
+However the rank of a product is a step function of the predicted score. To understand why think of products A and B with score(A)=score(B) + $\Delta$. Small changes to score of B [this is what happends during training] $\delta < \Delta$  don't matter.  The rank does not change for a while and as soon as $\delta > \Delta $ the rank of both A and B  changes.[fn:2]
 
-*Therefore need to find a proxy that's differentiable and is an upper bound for NDCG or similar losses that matter to business*
+*Therefore we need to find a proxy that's differentiable and is an upper bound for NDCG or similar losses that matter to business*
 
 *** How to find a proxy metric?
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
@@ -72,6 +72,8 @@ The key idea is:
 This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
 
 * Footnotes
+[fn:2] If your remember grade 12 calculus, a differentiable function  of a single variable first has to be continuous-meaning the limits from left and right need to agree.
+
 
 [fn:1] *Who will benefit*
 - ML engineers interested in building low latency search ranking systems that work at internet scale (think tens of millions of concurrent users)
