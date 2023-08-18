@@ -16,7 +16,7 @@ Note: I use x<- y  to denote that x depends on y.
 - DISCOUNT<-Rank<- Predicted score ($S_i$)
 - $S_{i}$<-$\Theta$ (parameters over which the NDCG can be optimized)
 
-However the rank of a product is a step function of the predicted score. To understand why think of products A and B with score(A)=score(B) + $\Delta$. Small changes to score of B [this is what happends during training] $\delta < \Delta$  don't matter.  The rank does not change for a while and as soon as $\delta > \Delta $ the rank of both A and B  changes.[fn:2]
+However the rank of a product is a step function of the predicted score. To understand why think of products A and B with score(A)=score(B) + $\Delta$. Small changes to score of B [this is what happends during training] $\delta < \Delta$  don't matter.  The rank does not change for a while and as soon as $\delta > \Delta$ the rank of both A and B  changes.[fn:2]
 
 *Therefore we need to find a proxy that's differentiable and is an upper bound for NDCG or similar losses that matter to business*
 
@@ -37,12 +37,20 @@ Thus the total *force* on a product that is in an incorrect position is the sum 
 
 *  Real world ranking needs to be efficient: inference latency and throughput, training cost & sample efficiency matter
 
-** Increase throughput
+** Increase throughput(aka requests per minute)
 *** Parallelize the work
-The following strategies fall under this header:
-****** Using GPUs
-GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching.
-****** Using models that can work on the same instance in parallel
+The following strategies fall under this header. Note that these strategies can be used in combination as well and are not always mutually exclusive:
+****** [Strategy #1]Scaling horizontally on cpus and GPUs
+This is the *brute force* strategy and it does not need much thought. In practice its highly effective and often the simplest since it does not need much algorithmmic thinking.  GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching. If the model is not very compute intensive then scaling by adding more cpu machines can also work.
+
+[[./img/horizontal_scaling.png]]
+
+*When using this strategy of distributing the load across multiple nodes, it's important to remember that all products that are being ranked for a given query need to be brought to the same node ultimately for ranking*
+
+
+[[file:img/gpu.png][A GPU has thousands of cores]][fn:3]
+
+****** [Strategy #2]Using models that can work on the same instance in parallel
 This strategy can be used if the score can be *decomposed* into components that can be added together. Usually this property is restricted to linear models. This strategy was actually SOTA uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
 Eg: in the following equation, *Delinquent CC*, *Full time job* can be indicator variables (0/1) and due to decomposability each effect $w_{x} x$  can be separately computed.
 
@@ -52,7 +60,7 @@ $$\mathrm{Score}= w_{\mathrm{Delinquent CC}}\mathrm{Delinquent CC} + w_{\mathrm{
 
 ** Inference latency
 
-Of the the three consideratios, in most Internet companies latency matters the most. Each 100ms in latency costs hard dollars. There are 3 ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
+At Internet  and ecommerce companies latency matters the most. Each 100ms in latency costs hard dollars. There are multiple ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
 
 *** Do less work
 Model cascades are one mechanism through which the average case unit latency can be brought down.
@@ -72,6 +80,8 @@ The key idea is:
 This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
 
 * Footnotes
+
+[fn:3]http://15418.courses.cs.cmu.edu/spring2017/lecture/basicarch/slide_061
 [fn:2] If your remember grade 12 calculus, a differentiable function  of a single variable first has to be continuous-meaning the limits from left and right need to agree.
 
 
