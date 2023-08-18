@@ -41,7 +41,9 @@ Thus the total *force* on a product that is in an incorrect position is the sum 
 *** Parallelize the work
 The following strategies fall under this header. Note that these strategies can be used in combination as well and are not always mutually exclusive:
 ****** [Strategy #1]Scaling horizontally on cpus and GPUs
-This is the *brute force* strategy and it does not need much thought. In practice its highly effective and often the simplest since it does not need much algorithmmic thinking.  GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching. If the model is not very compute intensive then scaling by adding more cpu machines can also work.
+ This is the *brute force* strategy and it does not need much thought. Given a query $q_i$ and a set of products $[p_{j}]$ the task of scoring each $p_{j}$ against the query falls into the SIMD (Single Instruction, Multiple Data ) pattern
+ In practice its highly effective and often the simplest since it does not need much algorithmmic thinking.
+ GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching. If the model is not very compute intensive then scaling by adding more cpu machines can also work.
 
 [[./img/horizontal_scaling.png]]
 
