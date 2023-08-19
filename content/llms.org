@@ -25,6 +25,17 @@ The best way to find the ideal settings for a specific task is to experiment. Tr
 The commercial APIs I've used have rudimentary support for fine-tuning. Fine tuning is not easy and when it's available it's limited. I think it's related to the fact that if the commercial API has to support a custom model they need to create a custom end-point. Creating a custom end-point needs more hardware. This is exacerbated by the huge supply crunch for GPUs.[fn:2]
 ** High prediction latency
 In my experience as an end-user commercial APIs have a p95 latency of anywhere between 8 to 10 seconds. This severely restricts the domain of use cases that can be tackled by LLMs. Eg: it's currently infeasible to use LLM APIs for search query understanding. As a user one doesn't want to wait for 10 seconds to do a product search on an Ecommerce website. On the research front there are architectures like [[https://www.linkedin.com/posts/activity-7083761484656242688-O-aB?utm_source=share&utm_medium=member_desktop][LongNet]] which has a demonstrated latency of < 1 second. However these backends are not available through commercial APIs as yet.
+** Bias in the model
+ It's well known that most commercial models are biased towards books, articles written in the United States since these documents are over-represented in the training dataset. As of now doesn't look like commercial APIs are doing anything to localize the model to the sensibilities, culture and even English as a language the way it's spoken in India. As a test I typed "I"m 18 and I still live with my parents. I'm embarassed". Note it's perfectly normal to live with your parents in cultures like India where there are joint families.
+
+   #+CAPTION:  Bard did not do a good job.
+
+ [[./img/18years_bard.png]]
+
+ #+CAPTION: OpenAI ChatGPT was better.
+
+ [[./img/18_chatgpt.png]]
+
 * Footnotes
 
 [fn:3]Arguably some companies are trying out fine-tuned versions of custom models which could mitigate some of these problems, but they are in a minority. Because 95% of companies use commercial APIs these problems will continue to shape the future adoption of LLMs for real use cases. For a more extensive discussion see:
