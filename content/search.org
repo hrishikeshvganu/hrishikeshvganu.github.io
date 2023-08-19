@@ -49,6 +49,9 @@ The following strategies fall under this header. Note that these strategies can 
 
 *When using this strategy of distributing the load across multiple nodes, it's important to remember that all products that are being ranked for a given query need to be brought to the same node ultimately for ranking*
 
+#+CAPTION: GPUs have thousands of cores
+#+ATTR_HTML: :alt ranking_force :title Action! :align right
+
 
 [[./img/gpu.png]][fn:3]
 
