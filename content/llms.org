@@ -34,6 +34,12 @@ In my experience as an end-user commercial APIs have a p95 latency of anywhere b
 
 #+CAPTION: OpenAI ChatGPT was better.
 
+
+-------
+
+
+
+
  [[./img/18_chatgpt.png]]
 
 * Footnotes
