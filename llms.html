@@ -5,38 +5,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Practical Problems with LLMs</title>
+<title>Practical Challenges with Adoption of Commercial LLM APIs</title>
 <meta name="generator" content="Org mode" />
 <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
 </head>
 <body>
 <div id="content">
-<h1 class="title">Practical Problems with LLMs</h1>
+<h1 class="title">Practical Challenges with Adoption of Commercial LLM APIs</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0308cf3">1. Not a silver bullet</a></li>
-<li><a href="#org41086bd">2. Unreasonable inference costs</a></li>
-<li><a href="#orgf921851">3. Tricky to get the LLM inference settings right</a></li>
-<li><a href="#org68f9a67">4. Poor support for fine-tuned custom models.</a></li>
-<li><a href="#orge4c4cf9">5. High prediction latency</a></li>
+<li><a href="#org666a2fd">1. Not a silver bullet</a></li>
+<li><a href="#org5413b2b">2. Unreasonable inference costs</a></li>
+<li><a href="#org1062662">3. Tricky to get the LLM inference settings right</a></li>
+<li><a href="#org796bd92">4. Poor support for fine-tuned custom models.</a></li>
+<li><a href="#orgc2ca46c">5. High prediction latency</a></li>
 </ul>
 </div>
 </div>
 <p>
 For the last 7 months or so LLMs were on a hype cycle. Companies have now begun to apprciate the ground realities.  My own understanding has also  evolved . Organizations that have their internal AI/ML teams are solving some of these problems. The majority of companies don't have in-house experts and at this point I think they face the following  practical problems.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </p>
-<div id="outline-container-org0308cf3" class="outline-2">
-<h2 id="org0308cf3"><span class="section-number-2">1</span> Not a silver bullet</h2>
+<div id="outline-container-org666a2fd" class="outline-2">
+<h2 id="org666a2fd"><span class="section-number-2">1</span> Not a silver bullet</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Realization that LLMs can't solve most problems when used out-of-the-box. They need to be combined with other ML models to build a complete use case. Eg: If the idea is to identify the article type in the user query a multiclass classifier needs to be used downstream in the pipeline. If you don't do this the LLM will  predict article types that don't exist in your catalog. This is good news for ML scientists like me. Looks like LLMs won't take over our jobs anytime soon :)
 </p>
 </div>
 </div>
-<div id="outline-container-org41086bd" class="outline-2">
-<h2 id="org41086bd"><span class="section-number-2">2</span> Unreasonable inference costs</h2>
+<div id="outline-container-org5413b2b" class="outline-2">
+<h2 id="org5413b2b"><span class="section-number-2">2</span> Unreasonable inference costs</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 When you  use commercial LLM APIs for inferencing and you have a MAU (Monthly Active User) of tens of millions, paying for inference hurts.  While commercial APIs might be charging a markup on the inferencing cost, the markup is likely to be minimal. This is because Google and Microsoft are in a race to acquire more users since this enables them to improve their models even more based on human feedback.
@@ -65,8 +65,8 @@ The LLM race threatens to have an impact on Google's variable cost of serving a 
 </div>
 </div>
 </div>
-<div id="outline-container-orgf921851" class="outline-2">
-<h2 id="orgf921851"><span class="section-number-2">3</span> Tricky to get the LLM inference settings right</h2>
+<div id="outline-container-org1062662" class="outline-2">
+<h2 id="org1062662"><span class="section-number-2">3</span> Tricky to get the LLM inference settings right</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Beam search is typically used for prediction/inference. There are settings like temperature, top-p, length penalty and usually you have to spend a good deal of time to get these right. This is what Bard had to say when I asked "temperature and other settings llms":
@@ -78,16 +78,16 @@ The best way to find the ideal settings for a specific task is to experiment. Tr
 <hr />
 </div>
 </div>
-<div id="outline-container-org68f9a67" class="outline-2">
-<h2 id="org68f9a67"><span class="section-number-2">4</span> Poor support for fine-tuned custom models.</h2>
+<div id="outline-container-org796bd92" class="outline-2">
+<h2 id="org796bd92"><span class="section-number-2">4</span> Poor support for fine-tuned custom models.</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The commercial APIs I've used have rudimentary support for fine-tuning. Fine tuning is not easy and when it's available it's limited. I think it's related to the fact that if the commercial API has to support a custom model they need to create a custom end-point. Creating a custom end-point needs more hardware. This is exacerbated by the huge supply crunch for GPUs.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </p>
 </div>
 </div>
-<div id="outline-container-orge4c4cf9" class="outline-2">
-<h2 id="orge4c4cf9"><span class="section-number-2">5</span> High prediction latency</h2>
+<div id="outline-container-orgc2ca46c" class="outline-2">
+<h2 id="orgc2ca46c"><span class="section-number-2">5</span> High prediction latency</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 In my experience as an end-user commercial APIs have a p95 latency of anywhere between 8 to 10 seconds. This severely restricts the domain of use cases that can be tackled by LLMs. Eg: it's currently infeasible to use LLM APIs for search query understanding. As a user one doesn't want to wait for 10 seconds to do a product search on an Ecommerce website. On the research front there are architectures like <a href="https://www.linkedin.com/posts/activity-7083761484656242688-O-aB?utm_source=share&amp;utm_medium=member_desktop">LongNet</a> which has a demonstrated latency of &lt; 1 second. However these backends are not available through commercial APIs as yet.
