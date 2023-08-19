@@ -45,6 +45,10 @@ The following strategies fall under this header. Note that these strategies can 
  In practice its highly effective and often the simplest since it does not need much algorithmmic thinking.
  GPUs have thousands of cores and can perform operations in parallel on multiple instances through batching. If the model is not very compute intensive then scaling by adding more cpu machines can also work.
 
+#+ATTR_HTML: :alt ranking_force :title Action! :align right
+#+CAPTION: Horizontal scaling. Uniformly distribute queries
+
+
 [[./img/horizontal_scaling.png]]
 
 *When using this strategy of distributing the load across multiple nodes, it's important to remember that all products that are being ranked for a given query need to be brought to the same node ultimately for ranking*
