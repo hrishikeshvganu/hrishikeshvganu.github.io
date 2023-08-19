@@ -78,7 +78,6 @@ The key idea is:
 
 #+CAPTION: Cascades reduce average unit latency
 #+ATTR_HTML: :alt ranking_force :title Action! :align right
-
 [[./img/cascade.png]]
 
 *** System optimizations
