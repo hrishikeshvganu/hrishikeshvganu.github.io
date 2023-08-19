@@ -29,17 +29,12 @@ In my experience as an end-user commercial APIs have a p95 latency of anywhere b
  It's well known that most commercial models are biased towards books, articles written in the United States since these documents are over-represented in the training dataset. As of now doesn't look like commercial APIs are doing anything to localize the model to the sensibilities, culture and even English as a language the way it's spoken in India. As a test I typed "*I'm 18 and I still live with my parents. I'm embarassed*". Note it's perfectly normal to live with your parents in cultures like India where there are joint families.
 
 #+CAPTION:  Bard did not do a good job.
-
  [[./img/18years_bard.png]]
-
-#+CAPTION: OpenAI ChatGPT was better.
-
 
 -------
 
 
-
-
+#+CAPTION: OpenAI ChatGPT was better.
  [[./img/18_chatgpt.png]]
 
 * Footnotes
