@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Practical Problems with LLMs</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content">
+<h1 class="title">Practical Problems with LLMs</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd8adc0f">Not a silver bullet</a></li>
+<li><a href="#orgcb9cc91">Unreasonable inference costs</a></li>
+<li><a href="#org6f2f233">Tricky to get the LLM inference settings right</a></li>
+<li><a href="#org13d45f8">Poor support for fine-tuned custom models.</a></li>
+</ul>
+</div>
+</div>
+<p>
+For the last 7 months or so LLMs were on a hype cycle. My own understanding has evolved and at this point I think there are the following  practical problems.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+<div id="outline-container-orgd8adc0f" class="outline-2">
+<h2 id="orgd8adc0f">Not a silver bullet</h2>
+<div class="outline-text-2" id="text-orgd8adc0f">
+<p>
+Realization that LLMs can't solve most problems when used out-of-the-box. They need to be combined with other ML models to build a complete use case. Eg: If the idea is to identify the article type in the user query a multiclass classifier needs to be used downstream in the pipeline. If you don't do this the LLM will  predict article types that don't exist in your catalog. This is good news for ML scientists like me. Looks like LLMs won't take over our jobs anytime soon :)
+</p>
+</div>
+</div>
+<div id="outline-container-orgcb9cc91" class="outline-2">
+<h2 id="orgcb9cc91">Unreasonable inference costs</h2>
+<div class="outline-text-2" id="text-orgcb9cc91">
+<p>
+When you  use commercial LLM APIs for inferencing and you have a MAU (Monthly Active User) of tens of millions, paying for inference hurts.  While commercial APIs might be charging a markup on the inferencing cost, the markup is likely to be minimal. This is because Google and Microsoft are in a race to acquire more users since this enables them to improve their models even more based on human feedback.
+</p>
+
+<p>
+Even if one uses smaller custom models, the costs are typically an order of magnitude higher than the inference cost of other ML models like GBDTs or feed forward neural networks that used to be the workhorse ML algorithms uptil now.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/azure_openai_pricing.png" alt="azure_openai_pricing.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Azure OpenAI inference pricing</p>
+</div>
+
+<p>
+The LLM race threatens to have an impact on Google's variable cost of serving a query. I'm sure it has some tricks up it's sleeve-like smart caching or adaptively deciding which queries can be processed through their existing flow and which need to go to an LLM.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/google_cost.png" alt="google_cost.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Incremental cost for Google depending on LLM coverage of queries</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f2f233" class="outline-2">
+<h2 id="org6f2f233">Tricky to get the LLM inference settings right</h2>
+<div class="outline-text-2" id="text-org6f2f233">
+<p>
+Beam search is typically used for prediction/inference. There are settings like temperature, top-p, length penalty and usually you have to spend a good deal of time to get these right. This is what Bard had to say when I asked "temperature and other settings llms":
+<span class="underline">The best way to find the ideal settings for a specific task is to experiment. Try different settings and see what results you get. You may need to adjust the settings depending on the specific input text.</span>
+</p>
+</div>
+</div>
+<div id="outline-container-org13d45f8" class="outline-2">
+<h2 id="org13d45f8">Poor support for fine-tuned custom models.</h2>
+<div class="outline-text-2" id="text-org13d45f8">
+<p>
+The commercial APIs I've used have rudimentary support for fine-tuning. Fine tuning is not easy and when it's available it's limited. I think it's related to the fact that if the commercial API has to support a custom model they need to create a custom end-point. Creating a custom end-point needs more hardware. This is exacerbated by the huge supply crunch for GPUs.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Arguably some companies are trying out fine-tuned versions of custom models which could mitigate some of these problems, but they are in a minority. Because 95% of companies use commercial APIs these problems will continue to shape the future adoption of LLMs for real use cases.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.tomshardware.com/news/chinas-bytedance-has-gobbled-up-dollar1-billion-of-nvidia-gpus-for-ai-this-year">https://www.tomshardware.com/news/chinas-bytedance-has-gobbled-up-dollar1-billion-of-nvidia-gpus-for-ai-this-year</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
