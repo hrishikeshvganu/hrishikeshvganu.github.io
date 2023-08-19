@@ -12,6 +12,7 @@ For this article we make the following assmptions:
 - Latency is important. Users expect to see results within ~ 100 ms
 - There are millions of concurrent users
 - The results are shown on what's typically called as the Product List Page (PLP). I denote this ranked list as $[p_{i}]$
+- There are other systems in the architecture like SOLR for boolean token matching, an ML module for query understanding etc. We will assume that they exists without explaining them in detail.
 
 * Ranking errors on the first page are worse (for the customer experience) than  on later pages
 In both cases in the figure, there are 2 products that are ranked incorrectly. Assume that the correct ranking is a swap. The one on left is worse.
