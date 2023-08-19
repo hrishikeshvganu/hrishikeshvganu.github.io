@@ -1,6 +1,8 @@
 #+options: num:10
 #+TITLE:  Practical Problems with LLMs
+
 <2023-08-19 Sat>
+
 For the last 7 months or so LLMs were on a hype cycle. My own understanding has evolved and at this point I think there are the following  practical problems.[fn:3]
 ** Not a silver bullet
 Realization that LLMs can't solve most problems when used out-of-the-box. They need to be combined with other ML models to build a complete use case. Eg: If the idea is to identify the article type in the user query a multiclass classifier needs to be used downstream in the pipeline. If you don't do this the LLM will  predict article types that don't exist in your catalog. This is good news for ML scientists like me. Looks like LLMs won't take over our jobs anytime soon :)
