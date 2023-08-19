@@ -50,7 +50,7 @@ The following strategies fall under this header. Note that these strategies can 
 *When using this strategy of distributing the load across multiple nodes, it's important to remember that all products that are being ranked for a given query need to be brought to the same node ultimately for ranking*
 
 
-[[file:img/gpu.png][A GPU has thousands of cores]][fn:3]
+[[./img/gpu.png]][fn:3]
 
 ****** [Strategy #2]Using models that can work on the same instance in parallel
 This strategy can be used if the score can be *decomposed* into components that can be added together. Usually this property is restricted to linear models. This strategy was actually SOTA uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
