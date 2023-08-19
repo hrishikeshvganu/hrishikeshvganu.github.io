@@ -1,5 +1,5 @@
 #+options: num:10
-#+TITLE:  Practical Challenges with Adoption of Commercial LLM APIs
+#+TITLE:  Practical Challenges with  Commercial LLM APIs
 
 For the last 7 months or so LLMs were on a hype cycle. Companies have now begun to apprciate the ground realities.  My own understanding has also  evolved . Organizations that have their internal AI/ML teams are solving some of these problems. The majority of companies don't have in-house experts and at this point I think they face the following  practical problems.[fn:3]
 ** Not a silver bullet
