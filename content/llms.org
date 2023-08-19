@@ -1,9 +1,7 @@
 #+options: num:10
 #+TITLE:  Practical Problems with LLMs
 
-<2023-08-19 Sat>
-
-For the last 7 months or so LLMs were on a hype cycle. My own understanding has evolved and at this point I think there are the following  practical problems.[fn:3]
+For the last 7 months or so LLMs were on a hype cycle. Companies have now begun to apprciate the ground realities.  My own understanding has also  evolved . Organizations that have their internal AI/ML teams are solving some of these problems. The majority of companies don't have in-house experts and at this point I think they face the following  practical problems.[fn:3]
 ** Not a silver bullet
 Realization that LLMs can't solve most problems when used out-of-the-box. They need to be combined with other ML models to build a complete use case. Eg: If the idea is to identify the article type in the user query a multiclass classifier needs to be used downstream in the pipeline. If you don't do this the LLM will  predict article types that don't exist in your catalog. This is good news for ML scientists like me. Looks like LLMs won't take over our jobs anytime soon :)
 ** Unreasonable inference costs
@@ -27,6 +25,7 @@ The best way to find the ideal settings for a specific task is to experiment. Tr
 The commercial APIs I've used have rudimentary support for fine-tuning. Fine tuning is not easy and when it's available it's limited. I think it's related to the fact that if the commercial API has to support a custom model they need to create a custom end-point. Creating a custom end-point needs more hardware. This is exacerbated by the huge supply crunch for GPUs.[fn:2]
 * Footnotes
 
-[fn:3]Arguably some companies are trying out fine-tuned versions of custom models which could mitigate some of these problems, but they are in a minority. Because 95% of companies use commercial APIs these problems will continue to shape the future adoption of LLMs for real use cases.
+[fn:3]Arguably some companies are trying out fine-tuned versions of custom models which could mitigate some of these problems, but they are in a minority. Because 95% of companies use commercial APIs these problems will continue to shape the future adoption of LLMs for real use cases. For a more extensive discussion see:
+[[https://huyenchip.com/2023/04/11/llm-engineering.html#prompt_engineering_challenges][Chip Huyen's blog post on LLM productionization]]
 
 [fn:2]https://www.tomshardware.com/news/chinas-bytedance-has-gobbled-up-dollar1-billion-of-nvidia-gpus-for-ai-this-year
