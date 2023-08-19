@@ -38,27 +38,27 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgded2e03">1. Problem Statement</a></li>
-<li><a href="#org9cd8d8b">2. Ranking errors on the first page are worse (for the customer experience) than  on later pages</a>
+<li><a href="#orgeb2745e">1. Problem Statement</a></li>
+<li><a href="#orgc4db112">2. Ranking errors on the first page are worse (for the customer experience) than  on later pages</a>
 <ul>
-<li><a href="#org7f76def">2.1. Capturing this property through ML is not easy</a>
+<li><a href="#org7b2b567">2.1. Capturing this property through ML is not easy</a>
 <ul>
-<li><a href="#org8613e9a">2.1.1. How to find a proxy metric?</a></li>
+<li><a href="#org5840bc3">2.1.1. How to find a proxy metric?</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org9d0ceb3">3. Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</a>
+<li><a href="#org5fa1141">3. Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</a>
 <ul>
-<li><a href="#org84a2975">3.1. Increase throughput(aka requests per minute)</a>
+<li><a href="#org025bbb9">3.1. Increase throughput(aka requests per minute)</a>
 <ul>
-<li><a href="#org797a9f8">3.1.1. Parallelize the work</a></li>
+<li><a href="#orgf6db208">3.1.1. Parallelize the work</a></li>
 </ul>
 </li>
-<li><a href="#org93c08ff">3.2. Inference latency</a>
+<li><a href="#orgbc84bbf">3.2. Inference latency</a>
 <ul>
-<li><a href="#orgdd3c298">3.2.1. Do less work</a></li>
-<li><a href="#org916075d">3.2.2. System optimizations</a></li>
+<li><a href="#org52b011a">3.2.1. Do less work</a></li>
+<li><a href="#orgdc528ed">3.2.2. System optimizations</a></li>
 </ul>
 </li>
 </ul>
@@ -71,8 +71,8 @@
  <b>Target audience</b><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </p>
 
-<div id="outline-container-orgded2e03" class="outline-2">
-<h2 id="orgded2e03"><span class="section-number-2">1</span> Problem Statement</h2>
+<div id="outline-container-orgeb2745e" class="outline-2">
+<h2 id="orgeb2745e"><span class="section-number-2">1</span> Problem Statement</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 For this article we make the following assmptions:
@@ -90,8 +90,8 @@ For this article we make the following assmptions:
 </div>
 </div>
 
-<div id="outline-container-org9cd8d8b" class="outline-2">
-<h2 id="org9cd8d8b"><span class="section-number-2">2</span> Ranking errors on the first page are worse (for the customer experience) than  on later pages</h2>
+<div id="outline-container-orgc4db112" class="outline-2">
+<h2 id="orgc4db112"><span class="section-number-2">2</span> Ranking errors on the first page are worse (for the customer experience) than  on later pages</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 In both cases in the figure, there are 2 products that are ranked incorrectly. Assume that the correct ranking is a swap. The one on left is worse.
@@ -104,8 +104,8 @@ In both cases in the figure, there are 2 products that are ranked incorrectly. A
 </div>
 </div>
 
-<div id="outline-container-org7f76def" class="outline-3">
-<h3 id="org7f76def"><span class="section-number-3">2.1</span> Capturing this property through ML is not easy</h3>
+<div id="outline-container-org7b2b567" class="outline-3">
+<h3 id="org7b2b567"><span class="section-number-3">2.1</span> Capturing this property through ML is not easy</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 A loss like NDCG takes into account this consideration. The idea is to <b>inflate</b> the relevance in a super-linear way and the intuition behind the discount is that after a certain rank the rank doesn't matter (because most users don't navigate so far down).
@@ -127,8 +127,8 @@ However the rank of a product is a step function of the predicted score. To unde
 </p>
 </div>
 
-<div id="outline-container-org8613e9a" class="outline-4">
-<h4 id="org8613e9a"><span class="section-number-4">2.1.1</span> How to find a proxy metric?</h4>
+<div id="outline-container-org5840bc3" class="outline-4">
+<h4 id="org5840bc3"><span class="section-number-4">2.1.1</span> How to find a proxy metric?</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 It's not easy since it's an inverse problem. I'll go into the theory later but I'll be practical and discuss an algorithm called LambdaRank that has been very successful in the real world. I'll provide a hand wavy sketch of how it works (not a proof. There might not be a proof so I'll focus on the emprical)
@@ -159,23 +159,23 @@ Thus the total <b>force</b> on a product that is in an incorrect position is the
 </div>
 </div>
 
-<div id="outline-container-org9d0ceb3" class="outline-2">
-<h2 id="org9d0ceb3"><span class="section-number-2">3</span> Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</h2>
+<div id="outline-container-org5fa1141" class="outline-2">
+<h2 id="org5fa1141"><span class="section-number-2">3</span> Real world ranking needs to be efficient: inference latency and throughput, training cost &amp; sample efficiency matter</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org84a2975" class="outline-3">
-<h3 id="org84a2975"><span class="section-number-3">3.1</span> Increase throughput(aka requests per minute)</h3>
+<div id="outline-container-org025bbb9" class="outline-3">
+<h3 id="org025bbb9"><span class="section-number-3">3.1</span> Increase throughput(aka requests per minute)</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org797a9f8" class="outline-4">
-<h4 id="org797a9f8"><span class="section-number-4">3.1.1</span> Parallelize the work</h4>
+<div id="outline-container-orgf6db208" class="outline-4">
+<h4 id="orgf6db208"><span class="section-number-4">3.1.1</span> Parallelize the work</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 The following strategies fall under this header. Note that these strategies can be used in combination as well and are not always mutually exclusive:
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="orgb45f973"></a>[Strategy #1]Scaling horizontally on cpus and GPUs<br />
+<li><a id="orgfaa439f"></a>[Strategy #1]Scaling horizontally on cpus and GPUs<br />
 <div class="outline-text-7" id="text-3-1-1-0-0-1">
 <p>
 This is the <b>brute force</b> strategy and it does not need much thought. Given a query \(q_i\) and a set of products \([p_{j}]\) the task of scoring each \(p_{j}\) against the query falls into the SIMD (Single Instruction, Multiple Data ) pattern
@@ -199,7 +199,7 @@ GPUs have thousands of cores and can perform operations in parallel on multiple 
 </div>
 </li>
 
-<li><a id="org81e8b36"></a>[Strategy #2]Using models that can work on the same instance in parallel<br />
+<li><a id="orgd69d3e0"></a>[Strategy #2]Using models that can work on the same instance in parallel<br />
 <div class="outline-text-7" id="text-3-1-1-0-0-2">
 <p>
 This strategy can be used if the score can be <b>decomposed</b> into components that can be added together. Usually this property is restricted to linear models. This strategy was actually SOTA uptil about 2013 before the era of deep learning. Even in today's world where full attribution of the score into individual components at an instance level is needed this is one of the most suitable strategies. Eg: credit scoring systems where one might want to understand how much reduction in credit score was due to (say) a late credit card payment  in a specific month[which would be a feature in the model].
@@ -219,16 +219,16 @@ Eg: in the following equation, <b>Delinquent CC</b>, <b>Full time job</b> can be
 </div>
 </div>
 
-<div id="outline-container-org93c08ff" class="outline-3">
-<h3 id="org93c08ff"><span class="section-number-3">3.2</span> Inference latency</h3>
+<div id="outline-container-orgbc84bbf" class="outline-3">
+<h3 id="orgbc84bbf"><span class="section-number-3">3.2</span> Inference latency</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 At Internet  and ecommerce companies latency matters the most. Each 100ms in latency costs hard dollars. There are multiple ways to reduce the inference latency. Here we talk about only unit latency (latency for a single prediction) so that we don't have to worry about throughput
 </p>
 </div>
 
-<div id="outline-container-orgdd3c298" class="outline-4">
-<h4 id="orgdd3c298"><span class="section-number-4">3.2.1</span> Do less work</h4>
+<div id="outline-container-org52b011a" class="outline-4">
+<h4 id="org52b011a"><span class="section-number-4">3.2.1</span> Do less work</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 Model cascades are one mechanism through which the average case unit latency can be brought down.
@@ -253,8 +253,8 @@ The key idea is:
 </div>
 </div>
 
-<div id="outline-container-org916075d" class="outline-4">
-<h4 id="org916075d"><span class="section-number-4">3.2.2</span> System optimizations</h4>
+<div id="outline-container-orgdc528ed" class="outline-4">
+<h4 id="orgdc528ed"><span class="section-number-4">3.2.2</span> System optimizations</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 This is about optimizations that exploit the features of the computer architecture like memory layout, vectorization capability etc to design optimized systems. The idea is not to reduce the # high level computations but to execute them more faster.
