@@ -5,7 +5,7 @@ For the last 7 months or so LLMs were on a hype cycle. Companies have now begun 
 ** Not a silver bullet
 Realization that LLMs can't solve most problems when used out-of-the-box. They need to be combined with other ML models to build a complete use case. Eg: If the idea is to identify the article type in the user query a multiclass classifier needs to be used downstream in the pipeline. If you don't do this the LLM will  predict article types that don't exist in your catalog. This is good news for ML scientists. Looks like LLMs won't take over our jobs anytime soon :)
 ** Unreasonable inference costs
-When you  use commercial LLM APIs for inferencing and you have a MAU (Monthly Active User) of tens of millions, paying for inference hurts.  While commercial APIs might be charging a markup on the inferencing cost, the markup is likely to be minimal. This is because Google and Microsoft are in a race to acquire more users since this enables them to improve their models even more based on human feedback.
+When you  use commercial LLM APIs for inferencing and you have a MAU (Monthly Active Users) base of tens of millions, paying for inference hurts.  While commercial APIs might be charging a markup on the inferencing cost, the markup is likely to be minimal. This is because Google and Microsoft are in a race to acquire more users since this enables them to improve their models even more based on human feedback.
 
 Even if one uses smaller custom models, the costs are typically an order of magnitude higher than the inference cost of other ML models like GBDTs or feed forward neural networks that used to be the workhorse ML algorithms uptil now.
 
