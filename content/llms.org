@@ -12,7 +12,7 @@ Even if one uses smaller custom models, the costs are typically an order of magn
 #+CAPTION: Azure OpenAI inference pricing
 [[./img/azure_openai_pricing.png]]
 
-The LLM race threatens to have an impact on Google's variable cost of serving a query. I'm sure it has some tricks up it's sleeve-like smart caching or adaptively deciding which queries can be processed through their existing flow and which need to go to an LLM.
+The LLM race threatens to have an impact on Google's unit economics due to higher  cost for serving a query through an LLM. In addition to internal efficient LLMs I'm sure it has some Engineering tricks up it's sleeve-like scaching or adaptively deciding which queries can be processed through their existing flow and which need to go to an LLM.
 
 #+CAPTION: Incremental cost for Google depending on LLM coverage of queries
 [[./img/google_cost.png]]
