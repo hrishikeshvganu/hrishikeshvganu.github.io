@@ -16,28 +16,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc761475">1. Not a silver bullet</a></li>
-<li><a href="#org48678a4">2. Unreasonable inference costs</a></li>
-<li><a href="#orgd792951">3. Tricky to get the LLM inference settings right</a></li>
-<li><a href="#org41fb561">4. Poor support for fine-tuned custom models.</a></li>
-<li><a href="#orgae4f7d0">5. High prediction latency</a></li>
-<li><a href="#org78e3f28">6. Bias in the model</a></li>
+<li><a href="#orge4fbe90">1. Not a silver bullet</a></li>
+<li><a href="#org47f9cb6">2. Unreasonable inference costs</a></li>
+<li><a href="#org84c0b4d">3. Tricky to get the LLM inference settings right</a></li>
+<li><a href="#org91a424c">4. Poor support for fine-tuned custom models.</a></li>
+<li><a href="#org6a8491f">5. High prediction latency</a></li>
+<li><a href="#org8ad9ba7">6. Bias in the model</a></li>
 </ul>
 </div>
 </div>
 <p>
 For the last 7 months or so LLMs were on a hype cycle. Companies have now begun to apprciate the ground realities.  My own understanding has also  evolved . Organizations that have their internal AI/ML teams are solving some of these problems. The majority of companies don't have in-house experts and at this point I think they face the following  practical problems.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </p>
-<div id="outline-container-orgc761475" class="outline-2">
-<h2 id="orgc761475"><span class="section-number-2">1</span> Not a silver bullet</h2>
+<div id="outline-container-orge4fbe90" class="outline-2">
+<h2 id="orge4fbe90"><span class="section-number-2">1</span> Not a silver bullet</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Realization that LLMs can't solve most problems when used out-of-the-box. They need to be combined with other ML models to build a complete use case. Eg: If the idea is to identify the article type in the user query a multiclass classifier needs to be used downstream in the pipeline. If you don't do this the LLM will  predict article types that don't exist in your catalog. This is good news for ML scientists. Looks like LLMs won't take over our jobs anytime soon :)
 </p>
 </div>
 </div>
-<div id="outline-container-org48678a4" class="outline-2">
-<h2 id="org48678a4"><span class="section-number-2">2</span> Unreasonable inference costs</h2>
+<div id="outline-container-org47f9cb6" class="outline-2">
+<h2 id="org47f9cb6"><span class="section-number-2">2</span> Unreasonable inference costs</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 When you  use commercial LLM APIs for inferencing and you have a MAU (Monthly Active Users) base of tens of millions, paying for inference hurts.  While commercial APIs might be charging a markup on the inferencing cost, the markup is likely to be minimal. This is because Google and Microsoft are in a race to acquire more users since this enables them to improve their models even more based on human feedback.
@@ -66,8 +66,8 @@ The LLM race threatens to have an impact on Google's unit economics due to highe
 </div>
 </div>
 </div>
-<div id="outline-container-orgd792951" class="outline-2">
-<h2 id="orgd792951"><span class="section-number-2">3</span> Tricky to get the LLM inference settings right</h2>
+<div id="outline-container-org84c0b4d" class="outline-2">
+<h2 id="org84c0b4d"><span class="section-number-2">3</span> Tricky to get the LLM inference settings right</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Beam search is typically used for prediction/inference. There are settings like temperature, top-p, length penalty and usually you have to spend a good deal of time to get these right. This is what Bard had to say when I asked "temperature and other settings llms":
@@ -79,24 +79,24 @@ The best way to find the ideal settings for a specific task is to experiment. Tr
 <hr />
 </div>
 </div>
-<div id="outline-container-org41fb561" class="outline-2">
-<h2 id="org41fb561"><span class="section-number-2">4</span> Poor support for fine-tuned custom models.</h2>
+<div id="outline-container-org91a424c" class="outline-2">
+<h2 id="org91a424c"><span class="section-number-2">4</span> Poor support for fine-tuned custom models.</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The commercial APIs I've used have rudimentary support for fine-tuning. Fine tuning is not easy and when it's available it's limited. I think it's related to the fact that if the commercial API has to support a custom model they need to create a custom end-point. Creating a custom end-point needs more hardware. This is exacerbated by the huge supply crunch for GPUs.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </p>
 </div>
 </div>
-<div id="outline-container-orgae4f7d0" class="outline-2">
-<h2 id="orgae4f7d0"><span class="section-number-2">5</span> High prediction latency</h2>
+<div id="outline-container-org6a8491f" class="outline-2">
+<h2 id="org6a8491f"><span class="section-number-2">5</span> High prediction latency</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 In my experience as an end-user commercial APIs have a p95 latency of anywhere between 8 to 10 seconds. This severely restricts the domain of use cases that can be tackled by LLMs. Eg: it's currently infeasible to use LLM APIs for search query understanding. As a user one doesn't want to wait for 10 seconds to do a product search on an Ecommerce website. On the research front there are architectures like <a href="https://www.linkedin.com/posts/activity-7083761484656242688-O-aB?utm_source=share&amp;utm_medium=member_desktop">LongNet</a> which has a demonstrated latency of &lt; 1 second. However these backends are not available through commercial APIs as yet.
 </p>
 </div>
 </div>
-<div id="outline-container-org78e3f28" class="outline-2">
-<h2 id="org78e3f28"><span class="section-number-2">6</span> Bias in the model</h2>
+<div id="outline-container-org8ad9ba7" class="outline-2">
+<h2 id="org8ad9ba7"><span class="section-number-2">6</span> Bias in the model</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 It's well known that most commercial models are biased towards books, articles written in the United States since these documents are over-represented in the training dataset. As of now doesn't look like commercial APIs are doing anything to localize the model to the sensibilities, culture and even English as a language the way it's spoken in India. As a test I typed "I"m 18 and I still live with my parents. I'm embarassed". Note it's perfectly normal to live with your parents in cultures like India where there are joint families.
@@ -107,6 +107,11 @@ It's well known that most commercial models are biased towards books, articles w
 <p><img src="./img/18years_bard.png" alt="18years_bard.png" />
 </p>
 </div>
+
+<hr />
+
+
+
 
 
 <div class="figure">
