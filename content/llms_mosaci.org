@@ -2,7 +2,7 @@
 ** Data loading
 ** Methods/optimizer
 ***
-[[pdf:./img/Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf::2++7.11;;annot-2-3][Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf: Page 2; Quoting: And as we’ll explain below, based on the new Chinchilla scaling law,]]
+[[pdf:./img/Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf][Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf: Page 2; Quoting: And as we’ll explain below, based on the new Chinchilla scaling law,]]
 
 [[pdf:./img/Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf][Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf: Page 2; Quoting: platform. Our profiling shows that a compute-optimal GPT-30B can be trained on 610B tokens for less than $500k.]]
 
