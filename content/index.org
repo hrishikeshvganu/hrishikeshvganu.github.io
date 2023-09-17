@@ -5,7 +5,7 @@ I have been working in ML and Large Scale Distributed Systems for several years.
 
 #+TOC: headlines 3
 
-*** [[file:llms_mosaci.org][Clever strategies for training LLMs with trillions of parameters]]
+** [[file:llms_mosaci.org][Clever strategies for training LLMs with trillions of parameters]]
 *** [[file:llms.org][Challenges with commercial LLM APIs]]
 *** [[file:search.org][Real World Search at Internet Scale]]
 *** [[file:antipatterns.org][Antipatterns when dealing with non ML stakeholders]]
