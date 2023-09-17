@@ -1,3 +1,0 @@
-* [[file:llms_mosaci.org][Clever strategies for training LLMs with trillions of parameters]]
-* [[file:llms.org][Challenges with commercial LLM APIs]]
-* [[file:search.org][Real World Search at Internet Scale]]
