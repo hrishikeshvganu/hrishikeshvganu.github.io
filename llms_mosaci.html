@@ -15,20 +15,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge4427cd">LLM training optimization</a>
+<li><a href="#org07b7764">LLM training optimization</a>
 <ul>
-<li><a href="#orgaf2abe2">Data loading</a></li>
-<li><a href="#orgff75e42">Methods/optimizer</a>
+<li><a href="#org0d25519">Data loading</a></li>
+<li><a href="#org84f9dd8">Methods/optimizer</a>
 <ul>
-<li><a href="#org308acac">30B params, 35 days, 450K USD, 600B tokens&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></a></li>
-<li><a href="#orgd95d794">failures handled</a></li>
-<li><a href="#org15b7b47">Streaming dataset implementation</a></li>
-<li><a href="#org0fab103">Composer</a></li>
-<li><a href="#org695a568">Chinchilla scaling laws&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></a></li>
-<li><a href="#org76e88d2">Zero infinity. NVMe offload</a></li>
-<li><a href="#org0ef3520">Only immediate next layer params are needed from other GPUs. Pipeline parallelism</a></li>
-<li><a href="#org7193416">Mixed precision training. FP32 weight updates. FP6 for gradients.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></a></li>
-<li><a href="#orgf302c53">memory for model states</a></li>
+<li><a href="#org6b218f5">30B params, 35 days, 450K USD, 600B tokens&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></a></li>
+<li><a href="#org83b1708">failures handled</a></li>
+<li><a href="#org047927e">Streaming dataset implementation</a></li>
+<li><a href="#org9a73069">Composer</a></li>
+<li><a href="#org39d6528">Chinchilla scaling laws&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></a></li>
+<li><a href="#org7079c39">Zero infinity. NVMe offload</a></li>
+<li><a href="#orga11f0a6">Only immediate next layer params are needed from other GPUs. Pipeline parallelism</a></li>
+<li><a href="#org673a369">Mixed precision training. FP32 weight updates. FP6 for gradients.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></a></li>
+<li><a href="#org757bfe4">memory for model states</a></li>
 </ul>
 </li>
 </ul>
@@ -36,16 +36,16 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orge4427cd" class="outline-2">
-<h2 id="orge4427cd">LLM training optimization</h2>
-<div class="outline-text-2" id="text-orge4427cd">
+<div id="outline-container-org07b7764" class="outline-2">
+<h2 id="org07b7764">LLM training optimization</h2>
+<div class="outline-text-2" id="text-org07b7764">
 </div>
-<div id="outline-container-orgaf2abe2" class="outline-3">
-<h3 id="orgaf2abe2">Data loading</h3>
+<div id="outline-container-org0d25519" class="outline-3">
+<h3 id="org0d25519">Data loading</h3>
 </div>
-<div id="outline-container-orgff75e42" class="outline-3">
-<h3 id="orgff75e42">Methods/optimizer</h3>
-<div class="outline-text-3" id="text-orgff75e42">
+<div id="outline-container-org84f9dd8" class="outline-3">
+<h3 id="org84f9dd8">Methods/optimizer</h3>
+<div class="outline-text-3" id="text-org84f9dd8">
 <p>
 <b>*</b>
 <a href="./img/Mosaic_GPT3.pdf">Mosaic<sub>GPT3</sub>. Page 2; Quoting: And as we’ll explain below, based on the new Chinchilla scaling law,</a>
@@ -58,9 +58,9 @@
 
 
 
-<div id="outline-container-org308acac" class="outline-4">
-<h4 id="org308acac">30B params, 35 days, 450K USD, 600B tokens&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></h4>
-<div class="outline-text-4" id="text-org308acac">
+<div id="outline-container-org6b218f5" class="outline-4">
+<h4 id="org6b218f5">30B params, 35 days, 450K USD, 600B tokens&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></h4>
+<div class="outline-text-4" id="text-org6b218f5">
 <p>
 <a href="./img/Mosaic_GPT3.pdf">Mosaic<sub>GPT3</sub>. Page 3; Quoting: Figure 2: Times and Costs to train GPT models ranging from 1.3B to 70B params. Each model is paired with a compute-optimal token budget based on ‘Training Compute-Optimal Language Models’. All training runs were profiled with Composer on a 256xA100-40GB cluster with 1600Gbps RoCE interconnect, using a global batch size of 2048 sequences ~= 4M tokens. * This recipe is predicted to reach the same quality as the original GPT3-175B recipe. ** This recipe is the same as Chinchilla-70B.</a>
 </p>
@@ -72,9 +72,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgd95d794" class="outline-4">
-<h4 id="orgd95d794">failures handled</h4>
-<div class="outline-text-4" id="text-orgd95d794">
+<div id="outline-container-org83b1708" class="outline-4">
+<h4 id="org83b1708">failures handled</h4>
+<div class="outline-text-4" id="text-org83b1708">
 <p>
 you can see how we resumed a GPT-6.7B training run that encountered a ‘hang’ (likely a failed
 communication op), and a GPT-2.7B that encountered a loss spike. In both cases, we were able to seamlessly
@@ -84,9 +84,9 @@ checkpoint path like `load<sub>path</sub>: s3://my-bucket/my-run/ep0-ba48000.pt`
 </div>
 </div>
 
-<div id="outline-container-org15b7b47" class="outline-4">
-<h4 id="org15b7b47">Streaming dataset implementation</h4>
-<div class="outline-text-4" id="text-org15b7b47">
+<div id="outline-container-org047927e" class="outline-4">
+<h4 id="org047927e">Streaming dataset implementation</h4>
+<div class="outline-text-4" id="text-org047927e">
 <p>
 <a href="./img/Mosaic_GPT3.pdf">Mosaic<sub>GPT3</sub>. Page 5; Quoting: When resuming from a checkpoint deep into a training run, it can take a long time to reload the dataloader state. For example, in Meta’s recent OPT-175B training logs, it says that around 30 minutes was spent waiting for the dataloader to “fast-forward” back to its checkpointed state. That’s 30 minutes during which all 1024 GPUs were sitting idle, wasting resources and adding frustrating latency. To avoid these problems, we’ve built our own streaming dataset implementation that features deterministic and near-instant resumption, and works seamlessly with Composer so that no fast-forwarding is needed. It’s also built from the ground up to support streaming datasets from object stores like S3, GCS, etc. with no impact on LLM training throughput. Stay tuned for an upcoming blog post with more info on streaming datasets!</a>
 </p>
@@ -95,36 +95,36 @@ checkpoint path like `load<sub>path</sub>: s3://my-bucket/my-run/ep0-ba48000.pt`
 
 
 
-<div id="outline-container-org0fab103" class="outline-4">
-<h4 id="org0fab103">Composer</h4>
-<div class="outline-text-4" id="text-org0fab103">
+<div id="outline-container-org9a73069" class="outline-4">
+<h4 id="org9a73069">Composer</h4>
+<div class="outline-text-4" id="text-org9a73069">
 <p>
 <a href="./img/Mosaic_GPT3.pdf">Mosaic<sub>GPT3</sub>. Page 6; Quoting: FSDP. Check out the code and try customizing it yourself! How is this possible? FSDP is a PyTorch-native implementation of the ZERO sharding strategies. ZERO shards the model + gradient + optimizer state across the whole cluster rather than replicate it on each GPU. This means that even a large 70B param model with ~ 1 TB of state only has to fit within the total cluster memory, not within each GPU. This can be accomplished with a 32xA100-40GB cluster, or a 16xA100-80GB cluster, etc. Enabling CPU offloading with Composer (work in progress!) will unlock even smaller systems. Composer + FSDP also has some sweet quality-of-life features: Checkpoints are saved as a single Pytorch `.pt` file from global device0, instead of a collection of sharded files from N different devices. This makes it easier to resume runs on different cluster sizes and share models for downstream tasks. FSDP is built by PyTorch and works seamlessly with standard mixed precision training via `torch.autocast(&#x2026;)` while also supporting advanced features such as low-precision gradient communication and low-precision master weights + optimizer state. FSDP can be used with Composer’s auto micro-batching engine to catch and adjust for OOM errors dynamically during training, and enable hardware-agnostic training configs. Now this is all great, but what about performance? We are happy to report that when using the MosaicML platform, we are able to train these LLMs at equal- or better- utilization to highly optimized frameworks such as Megatron-LM. We regularly see 40%+ MFU (Model FLOPS Utilization) when training with real-world settings such as a GPT-13B model on 256xA100 GPUs. This matches reports from other frameworks while using lower-tier cards (40GB vs. 80GB), using larger device counts (256 GPUs vs. 8-64 GPUs), and providing way more flexibility.</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org695a568" class="outline-4">
-<h4 id="org695a568">Chinchilla scaling laws&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></h4>
-<div class="outline-text-4" id="text-org695a568">
+<div id="outline-container-org39d6528" class="outline-4">
+<h4 id="org39d6528">Chinchilla scaling laws&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></h4>
+<div class="outline-text-4" id="text-org39d6528">
 <p>
 <a href="./img/Mosaic_GPT3.pdf">Mosaic<sub>GPT3</sub>. Page 7; Quoting: Figure 6: We compare the original GPT3-175B recipe with a new compute-optimal GPT-30B recipe. We substitute 175B -&gt; 30B parameters, and 300B -&gt; 610B tokens. Both models have nearly equal predicted loss values based on the Chinchilla scaling law (Eq 10), but the GPT-30B recipe uses 65% less compute as the GPT3-175B recipe. Compute is measured using the standard approximation `FLOPS = 6 * N * D`.</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org76e88d2" class="outline-4">
-<h4 id="org76e88d2">Zero infinity. NVMe offload</h4>
-<div class="outline-text-4" id="text-org76e88d2">
+<div id="outline-container-org7079c39" class="outline-4">
+<h4 id="org7079c39">Zero infinity. NVMe offload</h4>
+<div class="outline-text-4" id="text-org7079c39">
 <p>
 <a href="./img/zero_infinity.pdf">zero<sub>infinity</sub>. Page 1; Quoting: Despite the capabilities of 3D parallelism for large model training, we are now arriving at the GPU memory wall [16]. The aggregate GPU memory is simply not large enough to support the growth in model size. Even with the newest NVIDIA A100 GPUs with 80 GB of memory, 3D parallelism requires 320 GPUs just to fit a trillion- parameter model for training, and scaling to a hundred trillion parameter model of the future would require over 6K GPUs even if we assume a 5x increase in GPU memory in the next few years.</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org0ef3520" class="outline-4">
-<h4 id="org0ef3520">Only immediate next layer params are needed from other GPUs. Pipeline parallelism</h4>
-<div class="outline-text-4" id="text-org0ef3520">
+<div id="outline-container-orga11f0a6" class="outline-4">
+<h4 id="orga11f0a6">Only immediate next layer params are needed from other GPUs. Pipeline parallelism</h4>
+<div class="outline-text-4" id="text-orga11f0a6">
 <p>
 <a href="./img/zero_infinity.pdf">zero<sub>infinity</sub>. Page 3; Quoting: Thus, ZeRO-3 can keep all the model states partitioned throughout the training except for the parameters that are required by the immediate computation. Heterogeneous Training Approaches Out of several hetero-</a>
 </p>
@@ -132,33 +132,33 @@ checkpoint path like `load<sub>path</sub>: s3://my-bucket/my-run/ep0-ba48000.pt`
 </div>
 
 
-<div id="outline-container-org7193416" class="outline-4">
-<h4 id="org7193416">Mixed precision training. FP32 weight updates. FP6 for gradients.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></h4>
-<div class="outline-text-4" id="text-org7193416">
+<div id="outline-container-org673a369" class="outline-4">
+<h4 id="org673a369">Mixed precision training. FP32 weight updates. FP6 for gradients.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span></h4>
+<div class="outline-text-4" id="text-org673a369">
 <p>
 <a href="./img/zero_infinity.pdf">zero<sub>infinity</sub>. Page 3; Quoting: Large model training is generally trained in mixed precision, where the forward and backward propagation are done in FP16 and the parameter updates in FP32 [36]. This leverages the performance acceleration of the tensor core units available on modern GPUs [37].</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf302c53" class="outline-4">
-<h4 id="orgf302c53">memory for model states</h4>
-<div class="outline-text-4" id="text-orgf302c53">
+<div id="outline-container-org757bfe4" class="outline-4">
+<h4 id="org757bfe4">memory for model states</h4>
+<div class="outline-text-4" id="text-org757bfe4">
 <p>
 <a href="./img/zero_infinity.pdf">zero<sub>infinity</sub>. Page 3; Quoting: For mixed precision training with Adam optimizer, the parameters and gradients are stored in FP16 while the optimizer states consist of FP32 momen- tum, variance, parameters, and gradients. In total, each parameter requires 20 bytes of memory. The total numbei32r of parameters in a Transformer based model primarily depends on the hidden di- mension (ℎ𝑑) and the number of Transformer layers (𝑛𝑙). Nearly all the parameters in a Transformer block come from four linear lay- ers within each block with sizes: (ℎ𝑑, 3ℎ𝑑), (ℎ𝑑, ℎ𝑑), (ℎ𝑑, 4ℎ𝑑) and (4ℎ𝑑, ℎ𝑑), respectively. Thus, the total parameters in a Transformer based model and can be approximated as 12 × 𝑛𝑙 × ℎ𝑑 2 requiring a total memory 240 × 𝑛𝑙 × ℎ𝑑 2 bytes to store the model states.</a>
 </p>
 </div>
 
 <ul class="org-ul">
-<li><a id="org964b765"></a><span class="todo TODO">TODO</span> Why 20 bytes per parameter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span><br />
-<div class="outline-text-5" id="text-org964b765">
+<li><a id="org96ecde6"></a><span class="todo TODO">TODO</span> Why 20 bytes per parameter?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="llm_training">llm_training</span></span><br />
+<div class="outline-text-5" id="text-org96ecde6">
 <ul class="org-ul">
 <li>params in GPU memory for holding: 16 bit</li>
 </ul>
 </div>
 <ul class="org-ul">
-<li><a id="org38386e5"></a>- gradients in GPU memory for holding: 16 bit. Needed for xfer to other GPUs?<br />
-<div class="outline-text-6" id="text-org38386e5">
+<li><a id="org434dea2"></a>- gradients in GPU memory for holding: 16 bit. Needed for xfer to other GPUs?<br />
+<div class="outline-text-6" id="text-org434dea2">
 <ul class="org-ul">
 <li>gradients: optimizer : 32 bit</li>
 <li>momentum: optimizer : 32 bit</li>
