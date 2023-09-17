@@ -1,6 +1,7 @@
 * LLM training optimization
 ** Data loading
 ** Methods/optimizer
+*** i
 ***
 [[pdf:~/SparkleShare/github.com/mac-pdf-files/technical/llms/llm_scaling/Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf::2++7.11;;annot-2-3][Mosaic LLMs (Part 2)_ GPT-3 quality for _$500k.pdf: Page 2; Quoting: And as we’ll explain below, based on the new Chinchilla scaling law,]]
 
