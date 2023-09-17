@@ -55,7 +55,7 @@
 ;; HRISHI it all has to be org-site:img, ./public/img and ./content/img
        (list "org-site:img"
         :base-directory "./content/img"
-        :base-extension "png\\|jpg"
+        :base-extension "png\\|jpg\\|pdf"
         :publishing-directory "./public/img"
         :publishing-function 'org-publish-attachment
         )
