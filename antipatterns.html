@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Antipatterns: Effectively working with non-Tech Teams as an ML Manager</title>
+<meta name="generator" content="Org mode" />
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<body>
+<div id="content">
+<h1 class="title">Antipatterns: Effectively working with non-Tech Teams as an ML Manager</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb4031d4">Summary</a></li>
+<li><a href="#org8cb2cbc">#1 "You promised to deliver this 4 days back"</a>
+<ul>
+<li><a href="#orgc1b7d1b">Identification</a></li>
+<li><a href="#org0ccaa3f">Handling</a></li>
+</ul>
+</li>
+<li><a href="#org4185aa3">#2 "Business EVP is saying our search page ranking is off. There are 2 products he should not be seeing"</a>
+<ul>
+<li><a href="#org431f33d">Identification</a></li>
+<li><a href="#org2db3631">Handling</a></li>
+</ul>
+</li>
+<li><a href="#org95a1799">#3 "As per design product x should be seen at position 6 in the first scroll  for  this type of user"</a>
+<ul>
+<li><a href="#orgcec2d52">Identification</a></li>
+<li><a href="#org7f42ef0">Handling</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb4031d4" class="outline-2">
+<h2 id="orgb4031d4">Summary</h2>
+<div class="outline-text-2" id="text-orgb4031d4">
+<p>
+ML managers who work in Applied ML teams need to work with Business and Product people who are their stakeholders. While Product and Business managers are used to working with Engineering teams (backend, frontend etc.) some of them don't have experience working with ML teams. This can cause misunderstanding unless both sides take care to arrive at a "ways of working" model.
+I provide some examples of antipatterns and how to identify them and then handle them.
+</p>
+</div>
+</div>
+<div id="outline-container-org8cb2cbc" class="outline-2">
+<h2 id="org8cb2cbc">#1 "You promised to deliver this 4 days back"</h2>
+<div class="outline-text-2" id="text-org8cb2cbc">
+</div>
+<div id="outline-container-orgc1b7d1b" class="outline-3">
+<h3 id="orgc1b7d1b">Identification</h3>
+<div class="outline-text-3" id="text-orgc1b7d1b">
+<p>
+Deliverables are promised but don't get delivered on time. Product manager gets angry because they have to answer to  business. ML manager gets frustated because she knows that in ML work you can control the quality or the timeline of the output but it's generally difficult to control both.
+</p>
+</div>
+</div>
+<div id="outline-container-org0ccaa3f" class="outline-3">
+<h3 id="org0ccaa3f">Handling</h3>
+<div class="outline-text-3" id="text-org0ccaa3f">
+<p>
+You are part of the problem. Educating the PM about the nature of ML work and committing for a Proof of Concept first helps. "Let's do the POC first. Then based on the learning I can commit on the MVP"
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4185aa3" class="outline-2">
+<h2 id="org4185aa3">#2 "Business EVP is saying our search page ranking is off. There are 2 products he should not be seeing"</h2>
+<div class="outline-text-2" id="text-org4185aa3">
+</div>
+<div id="outline-container-org431f33d" class="outline-3">
+<h3 id="org431f33d">Identification</h3>
+<div class="outline-text-3" id="text-org431f33d">
+<p>
+Business stakeholders need an explanation for something they feel is a discrepancy. PM is ruffled because she knows we should look at platform metrics but can't ignore individual user complaints as well. He asks "Do we have a bug?". You spend a lot of time in finding a bug because you dont' have a good systems' dashboard.
+</p>
+</div>
+</div>
+<div id="outline-container-org2db3631" class="outline-3">
+<h3 id="org2db3631">Handling</h3>
+<div class="outline-text-3" id="text-org2db3631">
+<p>
+You need 3 things here: a) Have dashboards that can quickly check that all pipelines and services are in order b)Provide users' events data to the PM so that they can convince themselves that the ranking is largely consistent with the users' events. Give them a self-serve debugging tool. Finally if there is not bug,  c)Educate the PM as well as the business leader that the ML algorithm is intended to maximize the experience for millions of users on the platform. It is possible that a specific user might not get a 100% accurate recommendation/ranking.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org95a1799" class="outline-2">
+<h2 id="org95a1799">#3 "As per design product x should be seen at position 6 in the first scroll  for  this type of user"</h2>
+<div class="outline-text-2" id="text-org95a1799">
+</div>
+<div id="outline-container-orgcec2d52" class="outline-3">
+<h3 id="orgcec2d52">Identification</h3>
+<div class="outline-text-3" id="text-orgcec2d52">
+<p>
+A business manager who handles the category in which x falls is unhappy because he is not getting enough visibility. Product manager does not know how the algorithm works so he's unable to explain. ML manager tries to "fix" the issue but is often unsuccessful.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7f42ef0" class="outline-3">
+<h3 id="org7f42ef0">Handling</h3>
+<div class="outline-text-3" id="text-org7f42ef0">
+<p>
+The first action you should take in this case is to educate both PM and Business that an ML algorithm can't ensure that a particular product x is always ranked in a particular slot. This is not a bug but it's how ML works. While learning on a continual basis the model can end up changing scores. Some algorithms can have randomzied components so even if the input is the same the output can change slightly. If this sort of direct control is needed it's best to add an Engineering logic layer which overrides the ML ranking.
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
