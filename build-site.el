@@ -53,10 +53,11 @@
              :section-numbers nil       ;; Don't include section numbers
              :time-stamp-file nil)
 ;; HRISHI it all has to be org-site:img, ./public/img and ./content/img
+;;HRISHI This means inside content->there is a dir called "img" and that dir has to be uploaded
        (list "org-site:img"
         :base-directory "./content/img"
-        :base-extension "png\\|jpg\\|pdf"
-        :publishing-directory "./public/img"
+        :base-extension "png\\|jpg\\|pdf" ;; tells to honor links to pdf files as well
+        :publishing-directory "./public/img" ;; HRISHI not sure what happens if I delete public
         :publishing-function 'org-publish-attachment
         )
 
